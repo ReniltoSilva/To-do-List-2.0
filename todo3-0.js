@@ -10,6 +10,9 @@ let taskID = 0
 let priority = 'Low'
 
 
+
+
+
 form.addEventListener('submit', (e) => {
     e.preventDefault()
 
