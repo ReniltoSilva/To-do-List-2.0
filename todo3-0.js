@@ -43,8 +43,7 @@ class Task {
         this.priority = priority;   
     }
 
-    removeTask() {
-        
+    removeTask() {  
     }
 
     markComplete() {
