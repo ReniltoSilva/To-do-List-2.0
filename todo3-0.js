@@ -48,11 +48,9 @@ class Task {
     }
 
     markComplete() {
-
-    }
+   }
 
     markPriority() {
-        
     }
     
 
