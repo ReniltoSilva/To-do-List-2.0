@@ -51,8 +51,6 @@ class Task {
 
     markPriority() {
     }
-    
-
 }
 
 const obj = new Task('1', 'Comprar carne', true, false, 'Low')
