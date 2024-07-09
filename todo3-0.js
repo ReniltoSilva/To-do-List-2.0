@@ -44,7 +44,6 @@ class Task {
     }
 
     removeTask() {  
-
     }
 
     markComplete() {
