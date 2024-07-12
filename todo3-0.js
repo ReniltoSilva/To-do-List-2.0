@@ -43,14 +43,14 @@ class Task {
         this.priority = priority;   
     }
 
-    removeTask() {  
-    }
+        removeTask() {  
+        }
 
-    markComplete() {
-   }
+        markComplete() {
+        }
 
-    markPriority() {
-    }
+        markPriority() {
+        }
 }
 
 const task = new Task('1', 'Comprar carne', true, false, 'Low')
