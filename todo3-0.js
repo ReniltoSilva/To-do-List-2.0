@@ -44,10 +44,11 @@ class Task {
     }
 
         removeTask() {  
-            
+
         }
 
         markComplete() {
+            
         }
 
         markPriority() {
