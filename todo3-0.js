@@ -52,9 +52,11 @@ class Task {
         }
 
         markPriority() {
-            
+
         }
 }
+
+
 
 const task = new Task('1', 'Comprar carne', true, false, 'low')
 
