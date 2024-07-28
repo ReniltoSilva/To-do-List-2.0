@@ -115,7 +115,6 @@ const task = new Task('1', 'Comprar carne', true, false, 'low')
     //         }else{
 
     //                 const taskContainer = document.createElement('div')
-    //                 taskContainer.classList.add('taskContainer') 
                                                
                                                 
        
