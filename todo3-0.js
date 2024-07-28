@@ -124,8 +124,7 @@ const task = new Task('1', 'Comprar carne', true, false, 'low')
     //                                             <button class="delBtnJS">Delete</button>
     //                                             </div>`
                                                 
-                  console.log(arrayTasks)
-                       
+       
                     
                     
 
