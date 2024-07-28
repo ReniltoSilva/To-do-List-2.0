@@ -118,8 +118,7 @@ const task = new Task('1', 'Comprar carne', true, false, 'low')
     //                 taskContainer.classList.add('taskContainer') 
     //                 taskContainer.innerText = text;  
 
-    //                 taskContainer.innerHTML = `<div class="textContainerJS">${text}</div>
-    //                                             <div class="checkMarkContainer">+</div>
+    //                 
     //                                             
                                                 
        
