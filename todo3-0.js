@@ -116,10 +116,7 @@ const task = new Task('1', 'Comprar carne', true, false, 'low')
 
     //                 const taskContainer = document.createElement('div')
     //                 taskContainer.classList.add('taskContainer') 
-    //                 taskContainer.innerText = text;  
-
-    //                 
-    //                                             
+                                               
                                                 
        
                     
