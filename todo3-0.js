@@ -120,9 +120,7 @@ const task = new Task('1', 'Comprar carne', true, false, 'low')
 
     //                 taskContainer.innerHTML = `<div class="textContainerJS">${text}</div>
     //                                             <div class="checkMarkContainer">+</div>
-    //                                             <div class="delBtnJsContainer">
-    //                                             <button class="delBtnJS">Delete</button>
-    //                                             </div>`
+    //                                             
                                                 
        
                     
