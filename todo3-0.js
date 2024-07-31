@@ -114,7 +114,6 @@ const task = new Task('1', 'Comprar carne', true, false, 'low')
     //             alert('Please, insert a task!')
     //         }else{
 
-    //                 const taskContainer = document.createElement('div')
                                                
                                                 
        
