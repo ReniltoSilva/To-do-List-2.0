@@ -89,10 +89,6 @@ const task = new Task('1', 'Comprar carne', true, false, 'low')
 //     taskContainer.appendChild(btnDelContainer)
 //     mainContainer.appendChild(taskContainer)
 
-//     input.value = '';
-
-// })
-
 
 
 
