@@ -111,8 +111,7 @@ const task = new Task('1', 'Comprar carne', true, false, 'low')
 
 
     //         if(text == ''){
-    //             alert('Please, insert a task!')
-    //         }else{
+    //          
 
                                                
                                                 
