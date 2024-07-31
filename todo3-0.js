@@ -109,9 +109,7 @@ const task = new Task('1', 'Comprar carne', true, false, 'low')
     //     let text = input.value
 
 
-
-    //         if(text == ''){
-    //          
+        
 
                                                
                                                 
