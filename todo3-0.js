@@ -70,8 +70,7 @@ const task = new Task('1', 'Comprar carne', true, false, 'low')
 
 //     e.preventDefault()
 
-//     let textInput = input.value;
-//     const btnDelete = `<button>Delete</button>`
+
 
 
 
