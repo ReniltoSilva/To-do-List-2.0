@@ -75,7 +75,6 @@ const task = new Task('1', 'Comprar carne', true, false, 'low')
 
 //     let obj1 = new Task(textInput, btnDelete)
 
-//     arrayTasks.push(obj1)
 
   
 
