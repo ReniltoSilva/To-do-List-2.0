@@ -73,7 +73,6 @@ const task = new Task('1', 'Comprar carne', true, false, 'low')
 //     let textInput = input.value;
 //     const btnDelete = `<button>Delete</button>`
 
-//     let obj1 = new Task(textInput, btnDelete)
 
 
   
