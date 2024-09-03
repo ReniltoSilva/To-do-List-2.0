@@ -82,8 +82,7 @@ const task = new Task('1', 'Comprar carne', true, false, 'low')
 //     let btnDelContainer = document.createElement('div')
 //     btnDelContainer.classList.add('delBtnJsContainer')
 //         taskContainer.innerText = arrayTasks[0].text
-//         btnDelContainer.innerHTML = arrayTasks[0].btnDelete
-//     console.log(arrayTasks)
+//    
 
 
 
