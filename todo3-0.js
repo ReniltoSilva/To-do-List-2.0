@@ -86,8 +86,6 @@ const task = new Task('1', 'Comprar carne', true, false, 'low')
 //     console.log(arrayTasks)
 
 
-//     taskContainer.appendChild(btnDelContainer)
-//     mainContainer.appendChild(taskContainer)
 
 
 
