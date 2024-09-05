@@ -1,0 +1,332 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(45deg, rgb(222, 253, 196), rgb(201, 239, 251));
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.create-new-list{
+    font-family: serif ;
+    position: fixed;
+    top:5px;
+    border-radius: 5px;
+    border: none;
+    width: 90px;
+    height: 25px;
+    box-shadow: 1.5px 1.5px 3px black;
+    background-color: rgb(157, 191, 253);
+    color: black;
+    font-weight: bold;
+}
+#container-new-list-on-page{
+    display: flex;
+}
+
+/* ---------- Dark/Light Mode ------------ */
+.JS-body-dark-mode{
+    background-image: linear-gradient(30deg, rgb(59, 59, 59), rgb(129, 128, 128));
+}
+
+.container-DL-button{
+    position: fixed;
+    top:20px;
+    right:20px;
+}
+
+.dark-light-mode{
+    position: relative;
+    color:white;
+    font-weight: bold;
+    font-size: 15px;
+    box-shadow: 1.5px 1.5px 3px black;
+    border-radius: 50%;
+    border: none;
+    margin: 5px;
+    height:36px;
+    width: 38px;
+    cursor: pointer;
+    background-color: rgb(62, 62, 62);
+}
+.JS-dark-mode{
+    position: relative;
+    color:white;
+    font-weight: bold;
+    font-size: 15px;
+    box-shadow: 1.5px 1.5px 3px black;
+    border-radius: 50%;
+    border: none;
+    margin: 5px;
+    height:36px;
+    width: 38px;
+    cursor: pointer;
+    background-color: rgb(203, 203, 203);
+}
+.img-Light-btn{
+    position: absolute;
+    top:4.5px;
+    right:3.5px;
+    width: 28px;
+    height:28px;
+}
+.img-Dark-btn{
+    display: flex;
+    top:29.5px;
+    right:29px;
+    width: 28px;
+    height:28px;
+}
+.JS-light-btn-hidden{
+    display: none;
+}
+/* ---------- Dark/Light Mode ------------ */
+
+.general-todo-container{
+    background: transparent;
+    backdrop-filter: blur(40px);
+    padding: 10px 10px 20px 10px;
+    border-radius: 5px;
+    box-shadow: 3.5px 3.5px 7px rgba(0, 0, 0, 0.5);
+    width: 340px;
+    margin: 0 5px;
+}
+.JS-general-todo-container{
+    display: block;
+    animation: JS-general-todo-container 0.4s ease-out forwards;
+    background: transparent;
+    backdrop-filter: blur(40px);
+    padding: 10px 10px 20px 10px;
+    border-radius: 5px;
+    box-shadow: 3.5px 3.5px 7px rgba(0, 0, 0, 0.5);
+    width: 340px;
+    margin: 0 5px;
+    height: 100%;
+}
+@keyframes JS-general-todo-container {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+.delBtnContainer{
+    position: relative;
+    right: -325px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    background-color: transparent;/*rgba(207, 3, 3, 0.5);*/
+    width: 15px;
+    height: 15px;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.delBtnContainer:hover{
+    background-color: rgba(251, 188, 188, 0.711);
+}
+
+p{
+    text-align: center;
+    margin:0;
+    font-family: 'Courier New';
+    font-weight: bold;
+}
+h1{
+    text-align: center;
+    margin:10px 0 30px 0;
+    outline: none;
+}
+.empty-error-message{
+    text-align: left;
+    margin-left: 10px;
+    color: rgb(171, 6, 6);
+    font-size: 16px;
+    font-family:'Courier New';
+    font-weight: bold;
+}
+.container-input-btn{
+    display: flex;
+}
+
+.taskInput {
+    padding: 10px;
+    width: 270px;
+    height:15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: inset 0px 0px 5px black;
+    background-color: white;
+}
+.JS-task-input{
+    border: 2px rgb(234, 9, 9) solid;
+}
+
+.taskInput::placeholder{
+    color: rgb(101, 101, 101);
+    font-size: 15px;
+}
+
+
+.addTaskButton{
+    color:white;
+    font-weight: bold;
+    font-size: 25px;
+    box-shadow: 1.5px 1.5px 3px black;
+    border-radius: 10%;
+    border: none;
+    margin: 5px;
+    height:33px;
+    width: 35px;
+    cursor: pointer;
+    background-color: rgb(157, 191, 253);
+}
+.addTaskButton:hover{
+    background-color: rgb(144, 165, 204);
+
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display:grid;
+    grid-template-columns: 220px 50px 50px;
+    column-gap: 2px;
+    border-radius: 5px;
+    box-shadow: 1.5px 1.5px 3px black;
+    padding: 10px;
+    background: #fefefe;
+    margin-bottom: 10px;
+    align-items: center;
+    word-wrap: break-word; /*Ensures long text wraps*/
+}
+
+li .task-text {
+    /* flex: 1; */
+    margin:0 5px; /* Adds space between text and delete button */
+    word-wrap: break-word; /* Ensures long text wraps */
+}
+.span{
+    grid-column: 1;
+    grid-row:1;
+    align-self: center;
+    outline:none;
+}
+
+.checkbox-done{
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 2px solid #535353;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.checkbox-done:checked{
+    border-color: #535353;
+    background-color: #02a157;
+}
+
+.delete-btn {
+    grid-row:1;
+    grid-column: 3;
+    background: rgb(211, 0, 0);
+    color: white;
+    box-shadow: 1.5px 1.5px 1px black;
+    border: none;
+    padding: 5px 5px;
+    cursor: pointer;
+    border-radius:5px;
+    flex-shrink: 0; /* Prevents button from shrinking */
+    justify-self: center;
+}
+
+.delete-btn:hover {
+    background: darkred;
+}
+
+.strike-through{
+    text-decoration:line-through;
+}
+
+.background-done-task{
+    background:#c6c6c6;
+    opacity:0.5;
+}
+
+.container-date{
+    width: 110px;
+    height:160px;
+    position: absolute;
+    top:20px;
+    left:20px;
+    right:0;
+    bottom:0;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-radius: 9px;
+    background-color: #ffffff;
+    box-shadow: 2px 2px 5px rgb(135, 135, 135);
+}
+.date-day{
+    font-family: monospace;
+    font-size: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:50px;
+    margin-top: 18px;
+    
+}
+.date-month{
+    font-family: monospace;
+    font-size: 19px;
+    background-color: rgb(245, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:25px;
+    margin:0px;
+    border-radius: 7px 7px 0px 0px;
+    border-bottom: solid 1px rgb(155, 155, 155);
+}
+.date-week{
+    font-size: 17px;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:20px;
+    margin-bottom: 18px
+}
+.date-year{
+    font-size: 18px;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:20px;
+    padding: 3px 0px 3px 0;
+    border-top: solid 1px rgb(190, 190, 190);
+}
