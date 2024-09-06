@@ -9,17 +9,17 @@ body {
     margin: 0;
 }
 .create-new-list{
-    font-family: serif ;
+    font-family: 'roboto';
+    font-weight: 600;
     position: fixed;
     top:5px;
     border-radius: 5px;
     border: none;
     width: 90px;
-    height: 25px;
+    height: 30px;
     box-shadow: 1.5px 1.5px 3px black;
-    background-color: rgb(157, 191, 253);
+    background-color: rgb(141, 179, 249);
     color: black;
-    font-weight: bold;
 }
 #container-new-list-on-page{
     display: flex;
