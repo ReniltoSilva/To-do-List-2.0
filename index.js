@@ -97,9 +97,8 @@
             newDelBtnContainer.parentElement.remove();
         });        
 
-        (generalTodoContainer).appendChild(newDelBtnContainer);
         (elementContainer).appendChild(generalTodoContainer);
-        (generalTodoContainer).append(newTitle, newDivInputBtn, newUL);
+        (generalTodoContainer).append(newTitle, newDivInputBtn, newUL, newDelBtnContainer);
         (newDivInputBtn).append(newInput, newAddButton);
         
 
