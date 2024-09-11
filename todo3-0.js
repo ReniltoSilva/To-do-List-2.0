@@ -4,9 +4,6 @@ const input = document.querySelector('.inputContainer')
 const ulContainer = document.querySelector('.generalTaskContainer')
 
 
-
-
-
 const deleteBtn = document.createElement('button')
 let completed;
 let taskID = 0
