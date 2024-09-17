@@ -13,6 +13,9 @@ let priority = 'Low'
 form.addEventListener('submit', (e) => {
     e.preventDefault()
 
+
+
+    
     const taskContainer = document.createElement('li')
     taskContainer.classList.add('taskContainer')
 
