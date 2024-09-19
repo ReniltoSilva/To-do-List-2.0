@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body{
+    height: 100%;
+    margin: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to right top, #3f4b5d, #585e6d, #70727d, #88888d, #9e9e9e);
+    background-size: cover;
+    height: 100%;
+}
+
+.mainContainer{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 350px;
+    height: 400px;
+    background-color: indianred;
+}
+
+.formContainer{
+    width: 95%;
+    height: 10%;
+    margin: 10px 0 5px 0;
+}
+
+.inputContainer{
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.taskContainer{
+    border-radius: 5px;
+    margin: 3px 0 5px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    height: 10%;
+    background-color: aliceblue;
+}
+
+.textContainerJS{
+    display: flex;
+    overflow: hidden;
+    flex-grow: 1;
+    white-space: normal;
+    word-wrap: break-word;
+    width: 77%;
+    height: 90%;
+    padding: 5px;
+}
+
+.delBtnJsContainer{
+    display: flex;
+    width: 17%;
+    height: 90%;
+    padding: 5px;
+}
+
+.delBtnJS{
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    color: aliceblue;
+    background-color: #70727d;
+}
+
+.checkMarkContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6%;
+    height: 90%;
+    background-color: #585e6d;
+}
