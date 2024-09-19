@@ -11,38 +11,51 @@ form.addEventListener('submit', (e) =>{
 
     e.preventDefault()
 
+    const delBtnContainer = document.createElement('div')
+    delBtnContainer.classList.add('delBtnJsContainer')  
+
+    const delBtn = document.createElement('button')
+    delBtn.classList.add('delBtnJS')
+
+    const taskContainer = document.createElement('div')
+    taskContainer.classList.add('taskContainer')
+
     let inputValue = input.value;
 
 
     if(inputValue === ''){
-            console.log('Please, insert a task')
+            alert('Please, insert a task')
     }else{
 
         let  newTask = {
                 name: inputValue,
-                delete: `<button>Delete</button>`
             }
 
-            arrayTasks.push(newTask) 
+            
 
-            arrayTasks.forEach(function(element){
+            arrayTasks.push(newTask) 
+            console.log(arrayTasks)
+
+            taskContainer.innerText = newTask.name
+            delBtn.innerText = 'Delete'
+            delBtn.addEventListener('click', () => {
+
                 
-                let taskContainer = document.createElement('div')
-                    taskContainer.classList.add('taskContainer')
-                    taskContainer.innerText = element.name;
-                
+                arrayTasks.splice(index, 1, taskContainer)
+                console.log(arrayTasks)
             })
 
             mainContainer.appendChild(taskContainer)
-
-            console.log(arrayTasks)
+            taskContainer.appendChild(delBtnContainer)
+            delBtnContainer.appendChild(delBtn)
     }
+
+           
+
 
     input.value = ''
 
 })
-
-
 
 
 
