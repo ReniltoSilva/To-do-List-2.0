@@ -331,3 +331,19 @@ li .task-text {
     padding: 3px 0px 3px 0;
     border-top: solid 1px rgb(190, 190, 190);
 }
+
+
+.weatherContainer{
+    position: absolute;
+    top: 200px;
+    left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 200px;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgb(135, 135, 135);
+    background-color: #ffffff;
+}

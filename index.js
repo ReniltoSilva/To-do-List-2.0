@@ -1,9 +1,97 @@
+const airQualityAPI = 'https://air-quality-api.open-meteo.com/v1/air-quality?latitude=21.0245&longitude=105.8412&current=european_aqi,pm10,pm2_5,carbon_monoxide&hourly=pm10,pm2_5,carbon_monoxide&forecast_hours=24'
+const weatherAPI = 'https://api.open-meteo.com/v1/forecast?latitude=21.0245&longitude=105.8412&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,weather_code,wind_speed_10m&minutely_15=temperature_2m,relative_humidity_2m,rain,is_day&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,rain,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=auto&past_hours=24&forecast_hours=24'
+const weatherContainer = document.querySelector('.weatherContainer')
+const temperatureContainer = document.querySelector('.temperatureContainer') 
+const windSpeedContainer = document.querySelector('.windSpeedContainer')
+const apareTemperatureContainer = document.querySelector('.apareTemperatureContainer')
+const isDayNightContainer = document.querySelector('.isDayNightContainer')
 
 
     document.addEventListener('onload', createNewList());
    
     const btnNewList = document.querySelector('.create-new-list');
     btnNewList.addEventListener('click', createNewList)
+
+
+
+//-------------------WEATHER FREE API--------------------///
+
+//Container Weather
+//Day or Night - Image
+//Temperature
+//Aparent Temperature
+// Humidity level
+//Precipitation probability
+//Wind Speed
+//Weather code Daily
+
+//Container AQI
+//pm2.5
+//pm10
+//Co
+//No2
+//Time - Hour, Minutes
+//Time zone
+
+
+
+fetchApi()
+
+function fetchApi(){
+
+    //Weather API
+    fetch(weatherAPI)
+    .then(resp => resp.json())
+    .then(data => {
+        let temperature = data.current.temperature_2m
+        let windSpeed = data.current.wind_speed_10m
+        let apareTemperature = data.current.apparent_temperature;
+        let isDayNight = data.current.is_day;
+        console.log(data)
+
+
+                //Air Quality API
+                            fetch(airQualityAPI)
+                            .then(resp => resp.json())
+                            .then(data => {
+                                console.log(data.current.pm2_5)
+                                console.log(data)
+                            })
+
+    displayWeather(temperature, windSpeed, apareTemperature, isDayNight)
+
+    })
+            
+}
+
+
+function displayWeather(temperature, windSpeed, apareTemperature, isDayNight){
+
+    temperatureContainer.innerText = temperature.toFixed(0)
+    windSpeedContainer.innerText = windSpeed
+    apareTemperatureContainer.innerText = apareTemperature.toFixed(0)
+    isDayNightContainer.innerText = isDayNight
+    console.log(temperature)
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //<-------------------- CURRENT DATE------------------->

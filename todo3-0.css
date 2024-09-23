@@ -13,19 +13,23 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(to right top, #3f4b5d, #585e6d, #70727d, #88888d, #9e9e9e);
+    /* background-image: linear-gradient(to right top, #3f4b5d, #585e6d, #70727d, #88888d, #9e9e9e); */
+    background-color: #f8e7e7;
     background-size: cover;
     height: 100%;
 }
 
 .mainContainer{
+    border-radius: 20px;
+    background: #e8a1a1;
+    box-shadow:  3px 3px 10px #be8484,
+             -3px -3px 10px #ffbebe;
     display: flex;
     justify-content:flex-start;
     align-items: center;
     flex-direction: column;
     width: 350px;
     height: 400px;
-    background-color: indianred;
 }
 
 .formContainer{
@@ -50,7 +54,12 @@ body{
     align-items: center;
     width: 95%;
     height: 10%;
-    background-color: aliceblue;
+    background: #e8a1a1;
+    box-shadow:  3px 3px 10px #be8484,
+             -3px -3px 10px #ffbebe;
+
+/* box-shadow:  3px 3px 3px #b55555,
+            -3px -3px 3px #ff8585;    */
 }
 
 .textContainerJS{
