@@ -1,85 +1,51 @@
 const mainContainer = document.querySelector('.mainContainer')
 const form = document.querySelector('.formContainer')
 const input = document.querySelector('.inputContainer')
+const deleteBtn = document.createElement('button')
+let completed;
+const todaysDate = new Date().getDay()
+let priority;
 
-
-
-let arrayTasks = []
-
-//Todo List with normal array
-form.addEventListener('submit', (e) =>{
+form.addEventListener('submit', (e) => {
 
     e.preventDefault()
 
-    const delBtnContainer = document.createElement('div')
-    delBtnContainer.classList.add('delBtnJsContainer')  
+    const task = new Task(`id`,`${input.value}`,`${deleteBtn}`,`${completed}`,`${priority}`,`${todaysDate}`)
 
-    const delBtn = document.createElement('button')
-    delBtn.classList.add('delBtnJS')
-
-    const taskContainer = document.createElement('div')
-    taskContainer.classList.add('taskContainer')
-
-    let inputValue = input.value;
-
-
-    if(inputValue === ''){
-            alert('Please, insert a task')
-    }else{
-
-        let  newTask = {
-                name: inputValue,
-            }
-
-            
-
-            arrayTasks.push(newTask) 
-            console.log(arrayTasks)
-
-            taskContainer.innerText = newTask.name
-            delBtn.innerText = 'Delete'
-            delBtn.addEventListener('click', () => {
-
-                
-                arrayTasks.splice(index, 1, taskContainer)
-                console.log(arrayTasks)
-            })
-
-            mainContainer.appendChild(taskContainer)
-            taskContainer.appendChild(delBtnContainer)
-            delBtnContainer.appendChild(delBtn)
-    }
-
-           
-
+    console.log(task)
 
     input.value = ''
-
 })
 
 
+// Todo List with Function Constructor
+function Task(id, text, deleteBtn, completed = false, priority = 'low', date = new Date()){
+        this.id = id
+        this.text = text
+        this.deleteBtn = deleteBtn
+        this.completed = completed
+        this.date = date
+        this.priority = priority
+}
+
+Task.prototype.removeTask = function(){
+
+}
+
+Task.prototype.addTask = function(){
+
+}
+
+Task.prototype.markComplete = function(){
+
+}
+
+const newTask = new Task(`,${input.value}`)
 
 
 
 
 
-
-
-
-
-
-
-
-//Todo List with Function Constructor
-// function Task(text, btnDelete){
-//         this.text = text
-//         this.btnDelete = btnDelete
-// }
-
-// Task.prototype.removeTask = function(){
-
-//     console.log(this.name)
-// }
 
 
 
