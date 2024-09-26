@@ -50,12 +50,14 @@ body{
     color: rgb(196, 195, 195);
     font-size: 15px;
     transition: ease-out 0.2s;
+    
 }
 
-.inputContainer:hover:active{
+.inputContainer:hover{
     background: rgba(125, 123, 123, 0.122);
     transition: ease-in 0.2s;
     width: 100%;
+    box-shadow: inset 0px 0px 5px black;
 }
 
 .generalTaskContainer{
