@@ -14,18 +14,15 @@ body{
     justify-content: center;
     align-items: center;
     /* background-image: linear-gradient(to right top, #3f4b5d, #585e6d, #70727d, #88888d, #9e9e9e); */
-    background-color: #f8e7e7;
-    background-size: cover;
+    background-image: linear-gradient(to right top, #373737, #3d3851, #453669, #503381, #5f2a96, #4c309a, #34359e, #0039a0, #00397f, #002e53, #001f2a, #090c0c);
     height: 100%;
 }
 
 .mainContainer{
-    border-radius: 20px;
-    background: #e8a1a1;
-    box-shadow:  3px 3px 10px #be8484,
-             -3px -3px 10px #ffbebe;
+    border-radius: 10px;
+    /* border: 1px solid rgba(255, 255, 255, 0.374); */
     display: flex;
-    justify-content:flex-start;
+    justify-content:center;
     align-items: center;
     flex-direction: column;
     width: 350px;
@@ -33,9 +30,14 @@ body{
 }
 
 .formContainer{
-    width: 95%;
+    width: 10%;
     height: 10%;
     margin: 10px 0 5px 0;
+    transition: ease-out 0.5s;
+}
+.formContainer:hover{
+    width: 75%;
+    transition: ease-in 0.5s;
 }
 
 .inputContainer{
@@ -43,6 +45,29 @@ body{
     width: 100%;
     height: 100%;
     border: none;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.374);
+    color: rgb(196, 195, 195);
+    font-size: 15px;
+    transition: ease-out 0.2s;
+}
+
+.inputContainer:hover:active{
+    background: rgba(125, 123, 123, 0.122);
+    transition: ease-in 0.2s;
+    width: 100%;
+}
+
+.generalTaskContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 95%;
+    margin: 5px 0 5px 0;
+    border-radius: 10px;
+    
 }
 
 .taskContainer{
@@ -54,12 +79,7 @@ body{
     align-items: center;
     width: 95%;
     height: 10%;
-    background: #e8a1a1;
-    box-shadow:  3px 3px 10px #be8484,
-             -3px -3px 10px #ffbebe;
-
-/* box-shadow:  3px 3px 3px #b55555,
-            -3px -3px 3px #ff8585;    */
+    background: #e6e0e08a;
 }
 
 .textContainerJS{

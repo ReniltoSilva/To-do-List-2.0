@@ -1,46 +1,63 @@
 const mainContainer = document.querySelector('.mainContainer')
 const form = document.querySelector('.formContainer')
 const input = document.querySelector('.inputContainer')
+const ulContainer = document.querySelector('.generalTaskContainer')
+
+
 const deleteBtn = document.createElement('button')
 let completed;
-const todaysDate = new Date().getDay()
-let priority;
+let taskID = 0
+let priority = 'Low'
+
 
 form.addEventListener('submit', (e) => {
-
     e.preventDefault()
 
-    const task = new Task(`id`,`${input.value}`,`${deleteBtn}`,`${completed}`,`${priority}`,`${todaysDate}`)
+    const taskContainer = document.createElement('li')
+    taskContainer.classList.add('taskContainer')
+
+
+    const task = new Task(`${taskID}`,`${input.value}`, true, false,`${priority}`)
+    
+
+    taskContainer.innerHTML = `<p class="textContainerJS">${input.value}</p>
+                                <span>${priority}</span>
+                                <input type="checkbox"/>
+                                <button>Delete</button>`
 
     console.log(task)
+    ulContainer.appendChild(taskContainer)
 
+    taskID++
     input.value = ''
 })
 
 
 // Todo List with Function Constructor
-function Task(id, text, deleteBtn, completed = false, priority = 'low', date = new Date()){
-        this.id = id
-        this.text = text
-        this.deleteBtn = deleteBtn
-        this.completed = completed
-        this.date = date
-        this.priority = priority
+class Task {
+    constructor(id, text, deleteBtn = true, completed = false, priority = 'low') {
+        this.id = id;
+        this.text = text;
+        this.deleteBtn = deleteBtn;
+        this.completed = completed;
+        this.priority = priority;   
+    }
+
+    removeTask() {
+        
+    }
+
+    markComplete() {
+    }
+
+    markPriority() {
+    }
+    
+
 }
 
-Task.prototype.removeTask = function(){
+const obj = new Task('1', 'Comprar carne', true, false, 'Low')
 
-}
-
-Task.prototype.addTask = function(){
-
-}
-
-Task.prototype.markComplete = function(){
-
-}
-
-const newTask = new Task(`,${input.value}`)
 
 
 
