@@ -51,12 +51,11 @@ function fetchApi(){
 
 
                 //Air Quality API
-                            fetch(airQualityAPI)
-                            .then(resp => resp.json())
-                            .then(data => {
-                                console.log(data.current.pm2_5)
-                                console.log(data)
-                            })
+                fetch(airQualityAPI)
+                .then(resp => resp.json())
+                .then(data => {
+                    console.log(data)
+                })
 
     displayWeather(temperature, windSpeed, apareTemperature, isDayNight)
 
@@ -120,8 +119,8 @@ function displayWeather(temperature, windSpeed, apareTemperature, isDayNight){
             const generalTodoContainer = document.createElement('div')
             generalTodoContainer.classList.add('JS-general-todo-container')
 
-            const newTitle = document.createElement('h1');
-            newTitle.classList.add('h1');
+            const newTitle = document.createElement('h3');
+            newTitle.classList.add('h3');
             newTitle.textContent = 'To-do List';
             newTitle.setAttribute('contenteditable', true)
 
