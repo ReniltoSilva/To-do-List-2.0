@@ -30,15 +30,11 @@ body{
 }
 
 .formContainer{
-    width: 10%;
+    width: 90%;
     height: 10%;
     margin: 10px 0 5px 0;
-    transition: ease-out 0.5s;
 }
-.formContainer:hover{
-    width: 75%;
-    transition: ease-in 0.5s;
-}
+
 
 .inputContainer{
     border-radius: 5px;
