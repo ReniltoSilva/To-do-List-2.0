@@ -96,30 +96,30 @@ function displayWeather(temperature, windSpeed, apareTemperature, isDayNight){
         const elementContainer = document.querySelector('#container-new-list-on-page');
 
 
-            const generalTodoContainer = document.createElement('div')
-            generalTodoContainer.classList.add('JS-general-todo-container')
+        const generalTodoContainer = document.createElement('div')
+        generalTodoContainer.classList.add('JS-general-todo-container')
 
-            const newTitle = document.createElement('h3');
-            newTitle.classList.add('h3');
-            newTitle.textContent = 'To-do List';
-            newTitle.setAttribute('contenteditable', true)
+        const newTitle = document.createElement('h3');
+        newTitle.classList.add('h3');
+        newTitle.textContent = 'To-do List';
+        newTitle.setAttribute('contenteditable', true)
 
-            const newUL = document.createElement('ul');
-                newUL.classList.add('ul')
+        const newUL = document.createElement('ul');
+            newUL.classList.add('ul')
 
         const newDivInputBtn = document.createElement('div');
         newDivInputBtn.classList.add('container-input-btn');
 
-            const newInput = document.createElement('input');
-            newInput.classList.add('taskInput');
-            newInput.setAttribute('placeholder', 'Add a new task')
-                newInput.addEventListener('keydown', (e) => {
-                    if(e.key === 'Enter'){
-                        addTaskTest(newInput.value, newUL)
+        const newInput = document.createElement('input');
+        newInput.classList.add('taskInput');
+        newInput.setAttribute('placeholder', 'Add a new task')
+            newInput.addEventListener('keydown', (e) => {
+                if(e.key === 'Enter'){
+                    addTaskTest(newInput.value, newUL)
 
-                        newInput.value = '';
-                    }
-                })
+                    newInput.value = '';
+                }
+            })
 
         const newAddButton = document.createElement('button');
         newAddButton.classList.add('addTaskButton');
@@ -144,6 +144,51 @@ function displayWeather(temperature, windSpeed, apareTemperature, isDayNight){
 
     }
 
+    // <------------------ ADD TASK ------------------->
+    function addTaskTest(input, newUL) {
+        
+        if(input == ''){
+        alert `Please, insert a task!`
+        return
+    }
+    
+    const newTask = document.createElement('li');
+    newTask.classList.add('li')
+    newTask.addEventListener('contextmenu', (e) => {
+        e.preventDefault()
+        spanItem.classList.toggle('strike-through');
+        newTask.classList.toggle('background-done-task');
+    })
+    
+    const spanItem = document.createElement('span');
+    spanItem.classList.add('span');
+    spanItem.setAttribute('contenteditable', true);
+    spanItem.innerText = input;
+    
+    
+    const checkBox = document.createElement('input');
+    checkBox.setAttribute('type','checkbox');
+    checkBox.classList.add('checkbox-done');
+    checkBox.addEventListener('click', () => {
+        spanItem.classList.toggle('strike-through');
+        newTask.classList.toggle('background-done-task');
+    });
+    
+    // newTask.innerHTML = `<button class="delete-btn" onclick="${newTask.remove()}">Delte<button/>`
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.classList.add('delete-btn');
+    deleteBtn.addEventListener('click', () => {
+        newTask.remove();
+    });
+    
+    // (generalTodoContainer).appendChild(newUL);
+    (newUL).appendChild(newTask);
+    (newTask).append(spanItem, deleteBtn, checkBox);
+}
+
+
 
 //<------------------ DARK/LIGHT MODE -------------------->
     const btnDarkLightMode = document.querySelector('.dark-light-mode');
@@ -157,44 +202,3 @@ function displayWeather(temperature, windSpeed, apareTemperature, isDayNight){
 
 
 //<------------------ LOCAL STORAGE-------------------->
-
-
-
-
-
-function addTaskTest(input, newUL) {
-
-    if(input == ''){
-        alert `Please, insert a task!`
-        return
-    }
-
-        const newTask = document.createElement('li');
-        newTask.classList.add('li')
-
-        const spanItem = document.createElement('span');
-        spanItem.classList.add('span');
-        spanItem.setAttribute('contenteditable', true);
-        spanItem.innerText = input;
-        
-
-        const checkBox = document.createElement('input');
-        checkBox.setAttribute('type','checkbox');
-        checkBox.classList.add('checkbox-done');
-            checkBox.addEventListener('click', () => {
-                spanItem.classList.toggle('strike-through');
-                newTask.classList.toggle('background-done-task');
-            });
-
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Delete';
-        deleteBtn.classList.add('delete-btn');
-            deleteBtn.addEventListener('click', () => {
-                newTask.remove();
-            });
-
-        // (generalTodoContainer).appendChild(newUL);
-        (newUL).appendChild(newTask);
-        (newTask).append(spanItem, deleteBtn, checkBox);
-
-}

@@ -4,98 +4,18 @@ const input = document.querySelector('.inputContainer')
 const ulContainer = document.querySelector('.generalTaskContainer')
 
 
-const deleteBtn = document.createElement('button')
-let completed;
-let taskID = 0
-let priority = 'Low'
+const arrayList = []
 
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
 
+    arrayList.push({
+        task: input.value,
+        id: (Math.random()*1000*1000).toFixed(0)
+    })
 
-    const taskContainer = document.createElement('li')
-    taskContainer.classList.add('taskContainer')
-
-
-    const task = new Task(`${taskID}`,`${input.value}`, true, false,`${priority}`)
-    
-
-    taskContainer.innerHTML = `<p class="textContainerJS">${input.value}</p>
-                                <span>${priority}</span>
-                                <input type="checkbox"/>
-                                <button>Delete</button>`
-
-    console.log(task)
-    ulContainer.appendChild(taskContainer)
-
-    taskID++
     input.value = ''
+
+    console.log(arrayList)
 })
-
-
-
-// Todo List with Function Constructor
-class Task {
-    constructor(id, text, deleteBtn = true, completed = false, priority = 'low') {
-        this.id = id;
-        this.text = text;
-        this.deleteBtn = deleteBtn;
-        this.completed = completed;
-        this.priority = priority;   
-    }
-
-        removeTask() {  
-
-        }
-
-        markComplete() {s
-
-        }
-
-        markPriority() {
-
-        }
-}
-
-const task = new Task('1', 'Comprar carne', true, false, 'low')
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-                                               
-                                                
-       
-                    
-                    
-
-
-
-
-
-    
