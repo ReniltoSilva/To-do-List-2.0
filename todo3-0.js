@@ -3,7 +3,7 @@ const form = document.querySelector('.formContainer')
 const input = document.querySelector('.inputContainer')
 const ulContainer = document.querySelector('.generalTaskContainer')
 
-document.addEventListener('DOMContentLoaded', loadFromLS())
+// document.addEventListener('DOMContentLoaded', loadFromLS())
 
 
 const arrayList = []
@@ -12,50 +12,127 @@ const arrayList = []
 form.addEventListener('submit', (e) => {
     e.preventDefault()
 
-    arrayList.push({
-        task: input.value,
-        id: (Math.random()*1000*1000).toFixed(0)
-    })
+    if(input.value == ''){
+        alert('Please, insert a task!')
+    }else{
+        const savedArray = JSON.parse(localStorage.getItem('tasks'))
 
-    saveLS()
+        if(savedArray == null || savedArray == []){
 
-    input.value = ''
+            arrayList.push({
+                task: input.value,
+                taskID: (Math.random()*1000*1000).toFixed(0)
+                })
 
-    console.log(arrayList)
-}) 
+            console.log('List created in Local Storage')
+
+            saveLS(arrayList)
+        }else{
+            const savedArray = JSON.parse(localStorage.getItem('tasks'))
+            const secondArray = [...savedArray]
+            secondArray.push({
+                tasks: input.value,
+                taskID: (Math.random()*1000*1000).toFixed(0)
+            })
+
+            console.log('List updated in Local Storage')
+            saveLS(secondArray)
+        }
+        
+        input.value = ''
+    }
+})
 
 
-//Save to LocalStorage
-function saveLS(){
-    localStorage.setItem('tasks', JSON.stringify(arrayList))
+//Save to local Storage
+function saveLS(array){
+    localStorage.setItem('tasks', JSON.stringify(array))
+
+    loadFromLS()
 }
 
-
-//Load from LocalStorage
+//Load from Local Storage
 function loadFromLS(){
     const savedArray = JSON.parse(localStorage.getItem('tasks'))
+    console.log(savedArray)
 
     savedArray.forEach((item) => {
-        const liElement = document.createElement('li')
-        liElement.classList.add('taskContainer')
-        liElement.innerHTML = `<span class="textContainerJS">
-                                ${item.task}
-                                </span>
-                                <div class="delBtnJsContainer">
-                                    <button class="delBtnJS">Delete</button>
-                                </div>`
 
-        liElement.addEventListener('contextmenu', (e) => {
-            e.preventDefault()
-            liElement.querySelector('.textContainerJS').classList.toggle('strikeThrough')
-        })
-
-        liElement.querySelector('.delBtnJS').addEventListener('click', () => {
-            liElement.remove()
-        })
-
-        ulContainer.appendChild(liElement)
+      const liJS = document.createElement('li')
+        liJS.classList.add('taskContainer')
+        liJS.innerTEXT = item.tasks
+        
+        ulContainer.appendChild(liJS)  //   STOPPED HERE, IT IS GENERATING THE DOUBLE OF THE TASKS
     })
-
-    console.log(savedArray)
 }
+
+
+// form.addEventListener('submit', (e) => {
+//     e.preventDefault()
+
+//     if(!input.value){
+//         alert('Please, insert a task!')
+//     }else{
+
+//         const savedArray = JSON.parse(localStorage.getItem('tasks'))
+    
+//         if(savedArray == [] || savedArray == null){
+//             console.log('Array is empty')
+//         }else{
+
+//             arrayList.push({
+//                 task: input.value,
+//                 id: (Math.random()*1000*1000).toFixed(0)
+//             })
+//         }
+//     }
+//     // const secondArray = [...arrayList]
+
+//     // secondArray.push({
+//     //     task: input.value,
+//     //     id: (Math.random()*1000*1000).toFixed(0)
+//     // })
+
+//     // saveLS()
+
+//     // input.value = ''
+
+//     // console.log(arrayList)
+
+// }) 
+
+
+// //Save to LocalStorage
+// function saveLS(){
+//     localStorage.setItem('tasks', JSON.stringify(arrayList))
+// }
+
+
+// //Load from LocalStorage
+// function loadFromLS(){
+//     const savedArray = JSON.parse(localStorage.getItem('tasks'))
+
+//     savedArray.forEach((item) => {
+//         const liElement = document.createElement('li')
+//         liElement.classList.add('taskContainer')
+//         liElement.innerHTML = `<span class="textContainerJS">
+//                                 ${item.task}
+//                                 </span>
+//                                 <div class="delBtnJsContainer">
+//                                     <button class="delBtnJS">Delete</button>
+//                                 </div>`
+
+//         liElement.addEventListener('contextmenu', (e) => {
+//             e.preventDefault()
+//             liElement.querySelector('.textContainerJS').classList.toggle('strikeThrough')
+//         })
+
+//         liElement.querySelector('.delBtnJS').addEventListener('click', () => {
+//             liElement.remove()
+//         })
+
+//         ulContainer.appendChild(liElement)
+//     })
+
+//     console.log(savedArray)
+// }
