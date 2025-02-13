@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', loadFromLS)
 
 const arrayList = []
 
-//Add Tasks
+//ADD TASKS
 form.addEventListener('submit', (e) => {
     e.preventDefault()
 
@@ -44,14 +44,26 @@ form.addEventListener('submit', (e) => {
 })
 
 
-//Save to local Storage
+//DELETE TASKS
+function removeTask(taskID){
+    
+    const savedArray = JSON.parse(localStorage.getItem('tasks'))
+
+    const newArray = savedArray.filter((item) => item.taskID != taskID)
+
+    saveLS(newArray)
+
+}
+
+
+//SAVE TO LOCAL STORAGE
 function saveLS(array){
     localStorage.setItem('tasks', JSON.stringify(array))
 
     loadFromLS()
 }
 
-//Load from Local Storage
+//LOAD FROM LOCAL STORAGE
 function loadFromLS(){
     ulContainer.innerHTML = '' // Clear the container before loading tasks
 
@@ -72,10 +84,10 @@ function loadFromLS(){
                                     ${item.tasks}
                                     </span>
                                     <div class="delBtnJsContainer">
-                                        <button class="delBtnJS">Delete</button>
+                                        <button class="delBtnJS" onclick="console.log(removeTask(${item.taskID}))">Delete</button>
                                     </div>`
 
-            ulContainer.append(liJS)  //   STOPPED HERE, IT IS GENERATING THE DOUBLE OF THE TASKS
+            ulContainer.append(liJS) 
         })
     }  
 }
