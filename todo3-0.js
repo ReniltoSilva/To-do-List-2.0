@@ -3,7 +3,7 @@ const form = document.querySelector('.formContainer')
 const input = document.querySelector('.inputContainer')
 const ulContainer = document.querySelector('.generalTaskContainer')
 
-// document.addEventListener('DOMContentLoaded', loadFromLS())
+document.addEventListener('DOMContentLoaded', loadFromLS)
 
 
 const arrayList = []
@@ -20,7 +20,7 @@ form.addEventListener('submit', (e) => {
         if(savedArray == null || savedArray == []){
 
             arrayList.push({
-                task: input.value,
+                tasks: input.value,
                 taskID: (Math.random()*1000*1000).toFixed(0)
                 })
 
@@ -53,17 +53,31 @@ function saveLS(array){
 
 //Load from Local Storage
 function loadFromLS(){
-    const savedArray = JSON.parse(localStorage.getItem('tasks'))
-    console.log(savedArray)
+    ulContainer.innerHTML = '' // Clear the container before loading tasks
 
-    savedArray.forEach((item) => {
+    const arrayLocalStorage = JSON.parse(localStorage.getItem('tasks'))
 
-      const liJS = document.createElement('li')
-        liJS.classList.add('taskContainer')
-        liJS.innerTEXT = item.tasks
-        
-        ulContainer.appendChild(liJS)  //   STOPPED HERE, IT IS GENERATING THE DOUBLE OF THE TASKS
-    })
+    if(arrayLocalStorage == null){
+        console.log('Array is empty')
+
+    }else{
+        const savedArray = JSON.parse(localStorage.getItem('tasks'))
+        console.log(savedArray)
+
+        savedArray.forEach((item) => {
+
+        const liJS = document.createElement('li')
+            liJS.classList.add('taskContainer')
+            liJS.innerHTML = `<span class="textContainerJS">
+                                    ${item.tasks}
+                                    </span>
+                                    <div class="delBtnJsContainer">
+                                        <button class="delBtnJS">Delete</button>
+                                    </div>`
+
+            ulContainer.append(liJS)  //   STOPPED HERE, IT IS GENERATING THE DOUBLE OF THE TASKS
+        })
+    }  
 }
 
 
