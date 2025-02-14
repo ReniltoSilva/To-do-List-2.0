@@ -21,7 +21,8 @@ form.addEventListener('submit', (e) => {
 
             arrayList.push({
                 tasks: input.value,
-                taskID: (Math.random()*1000*1000).toFixed(0)
+                taskID: (Math.random()*1000*1000).toFixed(0),
+                done: false
                 })
 
             console.log('List created in Local Storage')
@@ -32,7 +33,8 @@ form.addEventListener('submit', (e) => {
             const secondArray = [...savedArray]
             secondArray.push({
                 tasks: input.value,
-                taskID: (Math.random()*1000*1000).toFixed(0)
+                taskID: (Math.random()*1000*1000).toFixed(0),
+                done: false
             })
 
             console.log('List updated in Local Storage')
@@ -44,6 +46,21 @@ form.addEventListener('submit', (e) => {
 })
 
 
+// //MARK TASKS AS DONE
+// function taskDone(taskID){
+//     const savedArray = JSON.parse(localStorage.getItem('Todo List'))
+
+//     const taskDoneArray = savedArray.filter((task) => {
+//         task.taskID == taskID ? task.done = false : task.done = true
+//     })
+
+//     taskDoneArray.map()
+
+//     console.log(taskID)
+   
+// }
+
+
 //DELETE TASKS
 function removeTask(taskID){
     
@@ -52,7 +69,6 @@ function removeTask(taskID){
     const newArray = savedArray.filter((item) => item.taskID != taskID)
 
     saveLS(newArray)
-
 }
 
 
@@ -62,6 +78,7 @@ function saveLS(array){
 
     loadFromLS()
 }
+
 
 //LOAD FROM LOCAL STORAGE
 function loadFromLS(){
@@ -74,18 +91,48 @@ function loadFromLS(){
 
     }else{
         const savedArray = JSON.parse(localStorage.getItem('Todo List'))
-        console.log(savedArray)
 
         savedArray.forEach((item) => {
 
         const liJS = document.createElement('li')
-            liJS.classList.add('taskContainer')
-            liJS.innerHTML = `<span class="textContainerJS">
-                                    ${item.tasks}
-                                    </span>
-                                    <div class="delBtnJsContainer">
-                                        <button class="delBtnJS" onclick="console.log(removeTask(${item.taskID}))">Delete</button>
-                                    </div>`
+            if(item.done == true){
+                liJS.classList.add('taskContainer')
+                liJS.innerHTML = `<span class="strikeThrough">
+                                        ${item.tasks}
+                                        </span>
+                                        <div class="delBtnJsContainer">
+                                            <button class="delBtnJS" onclick="removeTask(${item.taskID})">Delete</button>
+                                        </div>`
+
+                    liJS.addEventListener('contextmenu', (e) => {
+                    e.preventDefault()
+                    const spanJS = liJS.querySelector('.strikeThrough')
+                    spanJS.classList.toggle('strikeThrough')
+                    item.done = false
+                    saveLS(savedArray)
+
+                    loadFromLS()
+                })
+            }else{
+
+                liJS.classList.add('taskContainer')
+                liJS.innerHTML = `<span class="textContainerJS"> 
+                                        ${item.tasks}
+                                        </span>
+                                        <div class="delBtnJsContainer">
+                                            <button class="delBtnJS" onclick="removeTask(${item.taskID})">Delete</button>
+                                        </div>`
+
+                    liJS.addEventListener('contextmenu', (e) => {
+                        e.preventDefault()
+                        const spanJS = liJS.querySelector('.textContainerJS')
+                        spanJS.classList.toggle('strikeThrough')
+                        item.done = true
+                        saveLS(savedArray)
+    
+                        loadFromLS()
+                    })
+            }
 
             ulContainer.append(liJS) 
         })
