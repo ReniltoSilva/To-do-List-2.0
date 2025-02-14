@@ -15,7 +15,7 @@ form.addEventListener('submit', (e) => {
     if(input.value == ''){
         alert('Please, insert a task!')
     }else{
-        const savedArray = JSON.parse(localStorage.getItem('tasks'))
+        const savedArray = JSON.parse(localStorage.getItem('Todo List'))
 
         if(savedArray == null || savedArray == []){
 
@@ -28,7 +28,7 @@ form.addEventListener('submit', (e) => {
 
             saveLS(arrayList)
         }else{
-            const savedArray = JSON.parse(localStorage.getItem('tasks'))
+            const savedArray = JSON.parse(localStorage.getItem('Todo List'))
             const secondArray = [...savedArray]
             secondArray.push({
                 tasks: input.value,
@@ -47,7 +47,7 @@ form.addEventListener('submit', (e) => {
 //DELETE TASKS
 function removeTask(taskID){
     
-    const savedArray = JSON.parse(localStorage.getItem('tasks'))
+    const savedArray = JSON.parse(localStorage.getItem('Todo List'))
 
     const newArray = savedArray.filter((item) => item.taskID != taskID)
 
@@ -58,7 +58,7 @@ function removeTask(taskID){
 
 //SAVE TO LOCAL STORAGE
 function saveLS(array){
-    localStorage.setItem('tasks', JSON.stringify(array))
+    localStorage.setItem('Todo List', JSON.stringify(array))
 
     loadFromLS()
 }
@@ -67,13 +67,13 @@ function saveLS(array){
 function loadFromLS(){
     ulContainer.innerHTML = '' // Clear the container before loading tasks
 
-    const arrayLocalStorage = JSON.parse(localStorage.getItem('tasks'))
+    const arrayLocalStorage = JSON.parse(localStorage.getItem('Todo List'))
 
     if(arrayLocalStorage == null){
         console.log('Array is empty')
 
     }else{
-        const savedArray = JSON.parse(localStorage.getItem('tasks'))
+        const savedArray = JSON.parse(localStorage.getItem('Todo List'))
         console.log(savedArray)
 
         savedArray.forEach((item) => {
@@ -91,74 +91,3 @@ function loadFromLS(){
         })
     }  
 }
-
-
-// form.addEventListener('submit', (e) => {
-//     e.preventDefault()
-
-//     if(!input.value){
-//         alert('Please, insert a task!')
-//     }else{
-
-//         const savedArray = JSON.parse(localStorage.getItem('tasks'))
-    
-//         if(savedArray == [] || savedArray == null){
-//             console.log('Array is empty')
-//         }else{
-
-//             arrayList.push({
-//                 task: input.value,
-//                 id: (Math.random()*1000*1000).toFixed(0)
-//             })
-//         }
-//     }
-//     // const secondArray = [...arrayList]
-
-//     // secondArray.push({
-//     //     task: input.value,
-//     //     id: (Math.random()*1000*1000).toFixed(0)
-//     // })
-
-//     // saveLS()
-
-//     // input.value = ''
-
-//     // console.log(arrayList)
-
-// }) 
-
-
-// //Save to LocalStorage
-// function saveLS(){
-//     localStorage.setItem('tasks', JSON.stringify(arrayList))
-// }
-
-
-// //Load from LocalStorage
-// function loadFromLS(){
-//     const savedArray = JSON.parse(localStorage.getItem('tasks'))
-
-//     savedArray.forEach((item) => {
-//         const liElement = document.createElement('li')
-//         liElement.classList.add('taskContainer')
-//         liElement.innerHTML = `<span class="textContainerJS">
-//                                 ${item.task}
-//                                 </span>
-//                                 <div class="delBtnJsContainer">
-//                                     <button class="delBtnJS">Delete</button>
-//                                 </div>`
-
-//         liElement.addEventListener('contextmenu', (e) => {
-//             e.preventDefault()
-//             liElement.querySelector('.textContainerJS').classList.toggle('strikeThrough')
-//         })
-
-//         liElement.querySelector('.delBtnJS').addEventListener('click', () => {
-//             liElement.remove()
-//         })
-
-//         ulContainer.appendChild(liElement)
-//     })
-
-//     console.log(savedArray)
-// }
