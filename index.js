@@ -34,8 +34,7 @@ function fetchApi(){
                     console.log(data)
                 })
 
-    displayWeather(temperature, windSpeed, apareTemperature, isDayNight)
-
+        displayWeather(temperature, windSpeed, apareTemperature, isDayNight)
     })         
 }
 
@@ -46,33 +45,31 @@ function displayWeather(temperature, windSpeed, apareTemperature, isDayNight){
     windSpeedContainer.innerText = windSpeed
     apareTemperatureContainer.innerText = apareTemperature.toFixed(0)
     isDayNightContainer.innerText = isDayNight
-    console.log(temperature)
-
-    
+    console.log(temperature)  
 }
 
 
-//-------------------WEATHER FREE API--------------------///
+    //-------------------WEATHER FREE API--------------------///
 
-//Container Weather
-//Day or Night - Image
-//Temperature
-//Aparent Temperature
-// Humidity level
-//Precipitation probability
-//Wind Speed
-//Weather code Daily
+    //Container Weather
+    //Day or Night - Image
+    //Temperature
+    //Aparent Temperature
+    // Humidity level
+    //Precipitation probability
+    //Wind Speed
+    //Weather code Daily
 
-//Container AQI
-//pm2.5
-//pm10
-//Co
-//No2
-//Time - Hour, Minutes
-//Time zone
+    //Container AQI
+    //pm2.5
+    //pm10
+    //Co
+    //No2
+    //Time - Hour, Minutes
+    //Time zone
 
 
-//<-------------------- CURRENT DATE------------------->
+    //<-------------------- CURRENT DATE------------------->
     const currentDate = new Date();
     const showDay = document.querySelector('.date-day');
     const showMonth = document.querySelector('.date-month');
@@ -148,49 +145,51 @@ function displayWeather(temperature, windSpeed, apareTemperature, isDayNight){
     function addTaskTest(input, newUL) {
         
         if(input == ''){
-        alert `Please, insert a task!`
-        return
+            alert `Please, insert a task!`
+            return
+        }
+    
+        const newTask = document.createElement('li');
+        newTask.classList.add('li')
+        newTask.addEventListener('contextmenu', (e) => {
+            e.preventDefault()
+            spanItem.classList.toggle('strike-through');
+            newTask.classList.toggle('background-done-task');
+        })
+    
+        const spanItem = document.createElement('span');
+        spanItem.classList.add('span');
+        spanItem.setAttribute('contenteditable', true);
+        spanItem.innerText = input;
+    
+    
+        const checkBox = document.createElement('input');
+        checkBox.setAttribute('type','checkbox');
+        checkBox.classList.add('checkbox-done');
+        checkBox.addEventListener('click', () => {
+            spanItem.classList.toggle('strike-through');
+            newTask.classList.toggle('background-done-task');
+        });
+    
+        // newTask.innerHTML = `<button class="delete-btn" onclick="${newTask.remove()}">Delte<button/>`
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.classList.add('delete-btn');
+        deleteBtn.addEventListener('click', () => {
+            newTask.remove();
+        });
+    
+        // (generalTodoContainer).appendChild(newUL);
+        (newUL).appendChild(newTask);
+        (newTask).append(spanItem, deleteBtn, checkBox);
+
+        saveToLocalStorage()
     }
-    
-    const newTask = document.createElement('li');
-    newTask.classList.add('li')
-    newTask.addEventListener('contextmenu', (e) => {
-        e.preventDefault()
-        spanItem.classList.toggle('strike-through');
-        newTask.classList.toggle('background-done-task');
-    })
-    
-    const spanItem = document.createElement('span');
-    spanItem.classList.add('span');
-    spanItem.setAttribute('contenteditable', true);
-    spanItem.innerText = input;
-    
-    
-    const checkBox = document.createElement('input');
-    checkBox.setAttribute('type','checkbox');
-    checkBox.classList.add('checkbox-done');
-    checkBox.addEventListener('click', () => {
-        spanItem.classList.toggle('strike-through');
-        newTask.classList.toggle('background-done-task');
-    });
-    
-    // newTask.innerHTML = `<button class="delete-btn" onclick="${newTask.remove()}">Delte<button/>`
-
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete';
-    deleteBtn.classList.add('delete-btn');
-    deleteBtn.addEventListener('click', () => {
-        newTask.remove();
-    });
-    
-    // (generalTodoContainer).appendChild(newUL);
-    (newUL).appendChild(newTask);
-    (newTask).append(spanItem, deleteBtn, checkBox);
-}
 
 
 
-//<------------------ DARK/LIGHT MODE -------------------->
+    //<------------------ DARK/LIGHT MODE -------------------->
     const btnDarkLightMode = document.querySelector('.dark-light-mode');
     btnDarkLightMode.addEventListener('click', lightSwitch);
 
@@ -201,4 +200,10 @@ function displayWeather(temperature, windSpeed, apareTemperature, isDayNight){
     }
 
 
-//<------------------ LOCAL STORAGE-------------------->
+    //<------------------ LOCAL STORAGE-------------------->
+
+    // function saveToLocalStorage(array){
+    //     localStorage.setItem('Todo List 1.0', JSON.stringify(array))
+
+    //     loadFromLocalStorage()
+    // }
