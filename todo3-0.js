@@ -1,3 +1,5 @@
+const addNewListBTN = document.querySelector('.addNewList')
+const mainListsContainer = document.querySelector('#mainListsContainer')
 const mainContainer = document.querySelector('.mainContainer')
 const form = document.querySelector('.formContainer')
 const input = document.querySelector('.inputContainer')
@@ -7,6 +9,38 @@ document.addEventListener('DOMContentLoaded', loadFromLS)
 
 
 const arrayList = []
+
+//CREATE NEW LIST INSIDE "mainListsContainer"
+addNewListBTN.addEventListener('click', createNewList)
+
+function createNewList(){
+
+    const todoContainer = document.createElement('div')
+    const formInputContainer = document.createElement('form')
+    const inputContainer = document.createElement('input')
+    const ulContainer = document.createElement('ul')
+    const liJS = document.createElement('li')
+    const spanJS = document.createElement('span')
+    const delBtnContainer = document.createElement('div');
+    const delBtn = document.createElement('delBtnJS')
+    
+    todoContainer.classList.add('mainContainer')
+    formInputContainer.classList.add('formContainer')
+    inputContainer.classList.add('inputContainer')
+    ulContainer.classList.add('generalTaskContainer')
+    liJS.classList.add('taskContainer')
+    spanJS.classList.add('textContainerJS')
+    delBtnContainer.classList.add('delBtnJsContainer');
+
+    mainListsContainer.appendChild(todoContainer)
+    todoContainer.appendChild(formInputContainer)
+    formInputContainer.appendChild(inputContainer)
+    todoContainer.appendChild(ulContainer)
+    ulContainer.appendChild(liJS)
+    liJS.append(spanJS, delBtnContainer)
+    delBtnContainer.appendChild(delBtn)
+}
+
 
 //CREATE AND ADD TASKS TO LOCAL STORAGE
 form.addEventListener('submit', (e) => {
