@@ -15,30 +15,41 @@ addNewListBTN.addEventListener('click', createNewList)
 
 function createNewList(){
 
-    const todoContainer = document.createElement('div')
-    const formInputContainer = document.createElement('form')
-    const inputContainer = document.createElement('input')
-    const ulContainer = document.createElement('ul')
-    const liJS = document.createElement('li')
-    const spanJS = document.createElement('span')
-    const delBtnContainer = document.createElement('div');
-    const delBtn = document.createElement('delBtnJS')
+    const mainContainer = document.createElement('div')
+        const formGeneralContainer = document.createElement('div')
+            const formInputContainer = document.createElement('form')
+                const inputContainer = document.createElement('input')
+        const ulContainer = document.createElement('ul')
+            const liJS = document.createElement('li')
+                const spanJS = document.createElement('span')
+                const delBtnContainer = document.createElement('div');
+                    const delBtn = document.createElement('delBtnJS')
     
-    todoContainer.classList.add('mainContainer')
-    formInputContainer.classList.add('formContainer')
-    inputContainer.classList.add('inputContainer')
-    ulContainer.classList.add('generalTaskContainer')
-    liJS.classList.add('taskContainer')
-    spanJS.classList.add('textContainerJS')
-    delBtnContainer.classList.add('delBtnJsContainer');
+    mainContainer.classList.add('mainContainer')
+        formGeneralContainer.classList.add('formGeneralContainer')
+            formInputContainer.classList.add('formContainer')
+                inputContainer.classList.add('inputContainer')
+        ulContainer.classList.add('generalTaskContainer')
+            liJS.classList.add('taskContainer')
+            spanJS.classList.add('textContainerJS')
+                delBtnContainer.classList.add('delBtnJsContainer');
 
-    mainListsContainer.appendChild(todoContainer)
-    todoContainer.appendChild(formInputContainer)
-    formInputContainer.appendChild(inputContainer)
-    todoContainer.appendChild(ulContainer)
-    ulContainer.appendChild(liJS)
-    liJS.append(spanJS, delBtnContainer)
-    delBtnContainer.appendChild(delBtn)
+    mainListsContainer.appendChild(mainContainer)
+        mainContainer.appendChild(formGeneralContainer, ulContainer)
+
+        formGeneralContainer.appendChild(formInputContainer)
+            formInputContainer.appendChild(inputContainer)
+
+        ulContainer.appendChild(liJS)
+            liJS.append(spanJS, delBtnContainer)
+                delBtnContainer.appendChild(delBtn)
+
+        // mainContainer.appendChild(formInputContainer)
+        // formInputContainer.appendChild(inputContainer)
+        // mainContainer.appendChild(ulContainer)
+        // ulContainer.appendChild(liJS)
+        // liJS.append(spanJS, delBtnContainer)
+        // delBtnContainer.appendChild(delBtn)
 }
 
 
