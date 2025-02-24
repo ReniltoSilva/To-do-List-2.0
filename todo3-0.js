@@ -7,14 +7,30 @@ const ulContainer = document.querySelector('.generalTaskContainer')
 
 // document.addEventListener('DOMContentLoaded', loadFromLS)
 
-const mainArrayLists = []
 
 const arrayList = []
 
 //CREATE NEW LIST INSIDE "mainListsContainer"
-addNewListBTN.addEventListener('click', addNewList)
+// addNewListBTN.addEventListener('click', loadListFromLS)
 
-function addNewList(){
+document.addEventListener('DOMContentLoaded', () => {
+
+    const savedList = JSON.parse(localStorage.getItem('Main List'))
+
+    console.log(savedList)
+
+    if(!savedList){
+        createnewList()
+    }else{
+        loadListFromLS(savedList)
+    }
+
+})
+
+// LOAD LIST FROM LOCAL STORAGE
+function loadListFromLS(savedList){
+
+    savedList.forEach((listEl) => {
 
     //CREATE ELEMENTS
     const mainContainer = document.createElement('div')
@@ -32,21 +48,13 @@ function addNewList(){
     mainContainer.classList.add('mainContainer')
         titleListContainer.classList.add('titleListContainer')
             titleListContainer.setAttribute('contenteditable', 'true')
-            titleListContainer.textContent = 'Todo List'
+            titleListContainer.textContent = `${listEl.listTitle}`
 
         formGeneralContainer.classList.add('formGeneralContainer')
             formInputContainer.classList.add('formContainer')
             formInputContainer.addEventListener('submit', (e) => {
                 e.preventDefault()
-
-                if(inputContainer.value == ''){
-                    alert('Please, add a task!')
-                }else{
-
-                    addTask(inputContainer.value)
-                }
-
-                inputContainer.value = ''
+                addTask(inputContainer.value)   
             })
                 inputContainer.classList.add('inputContainer')
                 inputContainer.setAttribute('placeholder', 'Add a task')
@@ -56,8 +64,6 @@ function addNewList(){
             // spanJS.classList.add('textContainerJS')
             //     delBtnContainer.classList.add('delBtnJsContainer');
 
-
-        
     //APPEND ELEMENTS       
     mainListsContainer.appendChild(mainContainer)
         mainContainer.append(titleListContainer, formGeneralContainer, ulContainer)
@@ -67,19 +73,130 @@ function addNewList(){
                 // liJS.append(spanJS, delBtnContainer)
                 //     delBtnContainer.appendChild(delBtn)
 
-    console.log('New list added to "mainArrayLists" and saved to Local Storage.')
-
+    })
 }
 
 
+// //RENDER LIST FROM LOCAL STORAGE
+// function createnewList(list){
+
+//     list.forEach((listEl) => {
+
+//     //CREATE ELEMENTS
+//     const mainContainer = document.createElement('div')
+//         const titleListContainer = document.createElement('h1')
+//         const formGeneralContainer = document.createElement('div')
+//             const formInputContainer = document.createElement('form')
+//                 const inputContainer = document.createElement('input')
+//         const ulContainer = document.createElement('ul')
+//             // const liJS = document.createElement('li')
+//             //     const spanJS = document.createElement('span')
+//             //     const delBtnContainer = document.createElement('div');
+//             //         const delBtn = document.createElement('delBtnJS')
+    
+//     //ADD CLASSES
+//     mainContainer.classList.add('mainContainer')
+//         titleListContainer.classList.add('titleListContainer')
+//             titleListContainer.setAttribute('contenteditable', 'true')
+//             titleListContainer.textContent = `${listEl.listTitle}`
+
+//         formGeneralContainer.classList.add('formGeneralContainer')
+//             formInputContainer.classList.add('formContainer')
+//             formInputContainer.addEventListener('submit', (e) => {
+//                 e.preventDefault()
+
+//                 if(inputContainer.value == ''){
+//                     alert('Please, add a task!')
+//                 }else{
+
+//                     addTask(inputContainer.value)
+//                 }
+
+//                 inputContainer.value = ''
+//             })
+//                 inputContainer.classList.add('inputContainer')
+//                 inputContainer.setAttribute('placeholder', 'Add a task')
+
+//         ulContainer.classList.add('generalTaskContainer')
+//             // liJS.classList.add('taskContainer')
+//             // spanJS.classList.add('textContainerJS')
+//             //     delBtnContainer.classList.add('delBtnJsContainer');
+
+//     //APPEND ELEMENTS       
+//     mainListsContainer.appendChild(mainContainer)
+//         mainContainer.append(titleListContainer, formGeneralContainer, ulContainer)
+//             formGeneralContainer.appendChild(formInputContainer)
+//                 formInputContainer.appendChild(inputContainer)
+//             // ulContainer.appendChild(liJS)
+//                 // liJS.append(spanJS, delBtnContainer)
+//                 //     delBtnContainer.appendChild(delBtn)
+
+//     })
+// }
+
+
+
+//CREATE NEW LIST
+function createnewList(){
+
+    const mainArrayLists = []
+
+    mainArrayLists.push({
+        listID: (Math.random()*1000*1000).toFixed(0),
+        listTitle: 'Todo List',
+        tasks: []
+    })
+    
+    localStorage.setItem('Main List', JSON.stringify(mainArrayLists))
+
+    loadListFromLS(mainArrayLists)
+
+    console.log('New list added and saved to Local Storage.')
+}
+
 //CREATE AND ADD TASKS TO LOCAL STORAGE
 function addTask(task){
+
+    const arrayTasks = []
+
+    const savedArray = JSON.parse(localStorage.getItem('Main List'))
+
+    if(task == ''){
+        alert('Please, add a task!')
+    }else{
+
+        savedArray.forEach((task) => {
+
+            arrayTasks.push({
+                taskID: (Math.random()*1000*1000).toFixed(0),
+                taskTitle: element,
+                done: false                               //STOPPED HERE
+            })
+
+        })
+        addTask(inputContainer.value)
+    }
+
+    task = ''
 
 console.log(task)
 
 }
 
 
+
+
+const arrayOfLists = [
+    {   
+        listID: (Math.random()*1000*1000).toFixed(0),
+        listTitle: 'Todo List',
+        tasks: [{
+            taskID: (Math.random()*1000*1000).toFixed(0),
+            taskContent: 'Task 1',
+            done: false
+        }]
+    }
+]
 
 
 
