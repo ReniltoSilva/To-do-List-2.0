@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', checkCreatedLists)
 
 firstList = []
 
+
 //CHECK IF THERE ARE LISTS IN LS, IF NOT, CREATE THE FIRST ONE.
 function checkCreatedLists(){
 
@@ -42,13 +43,12 @@ function checkCreatedLists(){
 }
 
 
-
 //RENDER FIRST LIST IN THE DOM
-function renderLists(firstList){
+function renderLists(arrayOfLists){
 
     mainListsContainer.innerHTML = ''
 
-    firstList.forEach((list) => {
+    arrayOfLists.forEach((list, index) => {
 
         //CREATE ELEMENTS
         const mainContainer = document.createElement('div')
@@ -68,7 +68,18 @@ function renderLists(firstList){
                 formInputContainer.classList.add('formContainer')
                 formInputContainer.addEventListener('submit', (e) => {
                     e.preventDefault()
-                    console.log(inputContainer.value)   
+
+                    console.log(arrayOfLists[index].tasks)
+
+                    arrayOfLists[index].tasks.push({
+                        taskID: (Math.random()*1000*1000).toFixed(0),
+                        taskTitle: inputContainer.value,
+                        taskDone: false
+                    })
+
+                    
+
+                    inputContainer.value = ''
                 })
                     inputContainer.classList.add('inputContainer')
                     inputContainer.setAttribute('placeholder', 'Add a task')
