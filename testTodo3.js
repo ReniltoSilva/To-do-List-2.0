@@ -77,7 +77,10 @@ function renderLists(arrayOfLists){
                         taskDone: false
                     })
 
-                    
+                    console.log(arrayOfLists[index].tasks)
+                    console.log(arrayOfLists)
+
+                    localStorage.setItem('Main Array Lists', JSON.stringify(arrayOfLists))
 
                     inputContainer.value = ''
                 })
