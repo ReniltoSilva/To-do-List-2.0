@@ -1,36 +1,54 @@
-const addNewListBTN = document.querySelector('.addNewList')
 const mainListsContainer = document.querySelector('#mainListsContainer')
-
-const newMainListArray = []
-
-//ADD NEW LIST ON PAGE LOAD OR LOAD EXISTING LIST FROM LOCALSTORAGE
-document.addEventListener('DOMContentLoaded', () => {
+const newListBTN = document.querySelector('.addNewList')
+newListBTN.addEventListener('click', () => {
     
-    const checkListLS = JSON.parse(localStorage.getItem('Main Array Lists'))
+    const listsFromLS = JSON.parse(localStorage.getItem('Main Array Lists'))
     
-    if(checkListLS === null){
+        listsFromLS.push({
+            listID: (Math.random()*1000*1000).toFixed(0),
+            listTitle: 'Todo List',
+            tasks: []
+        })
+    
+    localStorage.setItem('Main Array Lists', JSON.stringify(listsFromLS))
 
-        newMainListArray.push({   
+    renderLists(listsFromLS)
+})  
+
+document.addEventListener('DOMContentLoaded', checkCreatedLists)
+
+firstList = []
+
+//CHECK IF THERE ARE LISTS IN LS, IF NOT, CREATE THE FIRST ONE.
+function checkCreatedLists(){
+
+    const savedListsLS = JSON.parse(localStorage.getItem('Main Array Lists'))
+
+        if(savedListsLS === null){
+
+            firstList.push({
                 listID: (Math.random()*1000*1000).toFixed(0),
                 listTitle: 'Todo List',
                 tasks: []
-            }
-        )
+            })
 
-        localStorage.setItem('Main Array Lists', JSON.stringify(newMainListArray))
-        loadListAndDisplayDOM(newMainListArray)
-    }else{
-        const newMainListArray = JSON.parse(localStorage.getItem('Main Array Lists'))
+            localStorage.setItem('Main Array Lists', JSON.stringify(firstList))
 
-        loadListAndDisplayDOM(newMainListArray)
-    }
-})
+            renderLists(firstList)
+
+        }else{
+            renderLists(savedListsLS)
+        }
+}
 
 
-//LOAD LIST AND DISPLAY ON DOM
-function loadListAndDisplayDOM(arrayList){
 
-    arrayList.forEach((list, index) => {
+//RENDER FIRST LIST IN THE DOM
+function renderLists(firstList){
+
+    mainListsContainer.innerHTML = ''
+
+    firstList.forEach((list) => {
 
         //CREATE ELEMENTS
         const mainContainer = document.createElement('div')
@@ -38,7 +56,7 @@ function loadListAndDisplayDOM(arrayList){
         const formGeneralContainer = document.createElement('div')
             const formInputContainer = document.createElement('form')
                 const inputContainer = document.createElement('input')
-        // const ulContainer = document.createElement('ul')
+        const ulContainer = document.createElement('ul')
 
         //ADD CLASSES
         mainContainer.classList.add('mainContainer')
@@ -50,68 +68,18 @@ function loadListAndDisplayDOM(arrayList){
                 formInputContainer.classList.add('formContainer')
                 formInputContainer.addEventListener('submit', (e) => {
                     e.preventDefault()
-                    addTask(inputContainer.value, arrayList, index, mainContainer)   
-
-                    inputContainer.value = ''
+                    console.log(inputContainer.value)   
                 })
                     inputContainer.classList.add('inputContainer')
                     inputContainer.setAttribute('placeholder', 'Add a task')
 
-            // ulContainer.classList.add('generalTaskContainer')
+                ulContainer.classList.add('generalTaskContainer')
+
 
         //APPEND ELEMENTS       
         mainListsContainer.appendChild(mainContainer)
-        mainContainer.append(titleListContainer, formGeneralContainer)
+        mainContainer.append(titleListContainer, formGeneralContainer, ulContainer)
             formGeneralContainer.appendChild(formInputContainer)
                 formInputContainer.appendChild(inputContainer)
     })
-
-    console.log(arrayList)
 }
-
-
-//ADD TASK AND SAVE TO LOCALSTORAGE
-function addTask(taskValue, arrayList, index, mainContainer){
-
-    console.log(mainContainer)
-    console.log(taskValue)
-
-    arrayList[index].tasks.forEach((task, mainContainer) => {
-
-        //CREATE ELEMENTS
-        const ulContainer = document.createElement('ul')
-        const liJS = document.createElement('li')
-                const spanJS = document.createElement('span')
-                const delBtnContainer = document.createElement('div');
-                        const delBtn = document.createElement('delBtnJS')
-    
-        //ADD CLASSES AND ATTRIBUTES    
-        ulContainer.classList.add('generalTaskContainer')            
-        liJS.classList.add('taskContainer')
-            spanJS.classList.add('textContainerJS')
-            spanJS.textContent = taskValue
-                delBtnContainer.classList.add('delBtnJsContainer');
-                    delBtn.classList.add('delBtnJS')
-                    delBtn.textContent = 'DELETE'
-    
-                    //SAVE TO LOCALSTORAGE
-                    arrayList[index].tasks.push({
-                        taskID: (Math.random()*1000*1000).toFixed(0),
-                        taskTitle: taskValue,
-                        done: false
-                    })
-
-        //APPEND ELEMENTS
-            mainContainer.appendChild(ulContainer)
-            ulContainer.appendChild(liJS)
-            liJS.append(spanJS, delBtnContainer)
-                delBtnContainer.appendChild(delBtn)
-
-    })
-
-    localStorage.setItem('Main Array Lists', JSON.stringify(arrayList))
-
-    console.log(arrayList[index].tasks)
-
-}
-
