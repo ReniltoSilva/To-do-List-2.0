@@ -93,35 +93,51 @@ function renderLists(arrayOfLists){
                     const liJS = document.createElement('li')
                         const spanJS = document.createElement('span')
                         const delBtnContainer = document.createElement('div');
-                            const delBtn = document.createElement('button')
-
+                        const delBtn = document.createElement('button')
+                        
                     //Add classes to task elements
                     liJS.classList.add('taskContainer')
+                        spanJS.textContent = task.taskTitle
                         spanJS.classList.add('textContainerJS')
-                        spanJS.textContent = task.taskTitle  
+                        spanJS.addEventListener('contextmenu', (e) => {
+                            e.preventDefault()
+                            
+                            task.taskDone = !task.taskDone
+                            renderLists(arrayOfLists)
+                        })  
+
+                            
+                        if(task.taskDone){
+                            spanJS.classList.add('strikeThrough')
+                            localStorage.setItem('Main Array Lists', JSON.stringify(arrayOfLists))
+                        }
+                        
+
+
+
+
+
                         delBtnContainer.classList.add('delBtnJsContainer')
                             delBtn.classList.add('delBtnJS')
                             delBtn.textContent = 'DELETE'
                             delBtn.addEventListener('click',() => {
 
-                                const listTasks = arrayOfLists[index].tasks
-                                const listIDVar = list.listID
-
-                                const taskIDs = arrayOfLists[index].tasks
-                                const taskIDVar = task.taskID
-                               
-                                const filteredTasks = taskIDs.filter((task) => task.taskID !== taskIDVar) 
-
-                                // pushTasks.push(filteredTasks)
-
-                                // console.log(arrayOfLists[index])
-                                console.log(listTasks)
-                                console.log(filteredTasks)
-                                console.log(listIDVar)//STOPPED HERE, FIND A WAY TO DELETE IN LS AND RENDER TO DOM
-                                // renderLists(arrayOfLists)
+                                    // Get the tasks of the current list
+                                    const listTasks = arrayOfLists[index].tasks;
                                 
-                                // localStorage.setItem('Main Array Lists', JSON.stringify(filteredArrays))//ERRO AQUI
-                                // renderLists(filteredArrays)
+                                    // Filter out the task that needs to be deleted
+                                    const updatedTasks = listTasks.filter(t => t.taskID !== task.taskID);
+                                
+                                    // Update the tasks array of the current list
+                                    arrayOfLists[index].tasks = updatedTasks;
+                                
+                                    // Save the updated array back to localStorage
+                                    localStorage.setItem('Main Array Lists', JSON.stringify(arrayOfLists));
+                                
+                                    // Re-render the lists to reflect the changes
+                                    renderLists(arrayOfLists);
+
+                                renderLists(arrayOfLists)
                             })
                             
                     //Append task elements
