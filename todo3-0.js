@@ -22,8 +22,8 @@ firstList = []
 function checkCreatedLists(){
 
     const savedListsLS = JSON.parse(localStorage.getItem('Main Array Lists'))
-
-        if(savedListsLS === null){
+    
+        if(savedListsLS === null || savedListsLS.length == 0){
 
             firstList.push({
                 listID: (Math.random()*1000*1000).toFixed(0),
@@ -49,7 +49,24 @@ function renderLists(arrayOfLists){
 
         //CREATE LIST ELEMENTS
         const mainContainer = document.createElement('div')
+        const delBtnContainer = document.createElement('span')
+              delBtnContainer.addEventListener('click', () => {
+                
+                const newValue = arrayOfLists.filter((i) => {
+                   return i.listID !== list.listID
+                })
+
+                localStorage.setItem('Main Array Lists', JSON.stringify(newValue))
+                renderLists(newValue)
+            })
+                
         const titleListContainer = document.createElement('h1')
+                titleListContainer.addEventListener('input', (e) => {
+                    e.preventDefault()
+                    arrayOfLists[index].listTitle = titleListContainer.textContent
+
+                    localStorage.setItem('Main Array Lists', JSON.stringify(arrayOfLists))
+                })
         const formGeneralContainer = document.createElement('div')
             const formInputContainer = document.createElement('form')
                 const inputContainer = document.createElement('input')
@@ -57,6 +74,9 @@ function renderLists(arrayOfLists){
 
         //ADD CLASSES TO LIST ELEMENTS
         mainContainer.classList.add('mainContainer')
+            delBtnContainer.classList.add('containerDelete')
+            delBtnContainer.classList.add('material-symbols-outlined')
+            delBtnContainer.textContent = 'delete_forever'
             titleListContainer.classList.add('titleListContainer')
                 titleListContainer.setAttribute('contenteditable', 'true')
                 titleListContainer.textContent = `${list.listTitle}`
@@ -99,6 +119,22 @@ function renderLists(arrayOfLists){
                     liJS.classList.add('taskContainer')
                         spanJS.textContent = task.taskTitle
                         spanJS.classList.add('textContainerJS')
+                        spanJS.setAttribute('contentEditable', 'true')
+                        spanJS.addEventListener('input', (e) => {
+                            e.preventDefault()
+                            const indexTask = arrayOfLists[index].tasks
+                            const taskID = task.taskID
+
+                            const taskIndex = indexTask.findIndex((t) => {
+                                return t.taskID == taskID
+                            })
+
+                            arrayOfLists[index].tasks[taskIndex].taskTitle = spanJS.textContent
+
+
+                            localStorage.setItem('Main Array Lists', JSON.stringify(arrayOfLists))
+                            console.log(arrayOfLists)
+                        })
                         spanJS.addEventListener('contextmenu', (e) => {
                             e.preventDefault()
                             
@@ -106,16 +142,11 @@ function renderLists(arrayOfLists){
                             renderLists(arrayOfLists)
                         })  
 
-                            
-                        if(task.taskDone){
+                    //Toggle task done true/false
+                    if(task.taskDone){
                             spanJS.classList.add('strikeThrough')
                             localStorage.setItem('Main Array Lists', JSON.stringify(arrayOfLists))
                         }
-                        
-
-
-
-
 
                         delBtnContainer.classList.add('delBtnJsContainer')
                             delBtn.classList.add('delBtnJS')
@@ -136,8 +167,6 @@ function renderLists(arrayOfLists){
                                 
                                     // Re-render the lists to reflect the changes
                                     renderLists(arrayOfLists);
-
-                                renderLists(arrayOfLists)
                             })
                             
                     //Append task elements
@@ -148,7 +177,7 @@ function renderLists(arrayOfLists){
 
         //APPEND LIST ELEMENTS TO THE DOM       
         mainListsContainer.appendChild(mainContainer)
-        mainContainer.append(titleListContainer, formGeneralContainer, ulContainer)
+        mainContainer.append(delBtnContainer, titleListContainer, formGeneralContainer, ulContainer)
             formGeneralContainer.appendChild(formInputContainer)
                 formInputContainer.appendChild(inputContainer)
     })
