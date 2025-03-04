@@ -1,15 +1,14 @@
 const mainListsContainer = document.querySelector('#mainListsContainer')
 const newListBTN = document.querySelector('.addNewList')
-const startBtn = document.querySelector('#start-btn')
 
 //Speech recognition test
 if (!('webkitSpeechRecognition' in window)) {
     console.log("Your browser does not support Speech Recognition.");
 } else {
     console.log("Speech Recognition is supported.");
-    // Initialize Speech Recognition
 }
 
+// Initialize Speech Recognition
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 
 // Optional settings
@@ -18,7 +17,7 @@ recognition.lang = "en-US"; // Language
 recognition.interimResults = false; // Only return final result
 
 // Start recognition when the button is clicked
-startBtn.addEventListener("click", () => {
+document.addEventListener("DOMContentLoaded", () => {
     recognition.start();
     console.log("Listening...");
 });
@@ -30,6 +29,7 @@ recognition.onresult = (event) => {
         document.getElementById("output").textContent = transcript; // Display text
         console.log("Recognized text:", transcript);
         checkCreatedLists(transcript)
+
 };
 
 // Handle errors
@@ -59,42 +59,49 @@ document.addEventListener('DOMContentLoaded', checkCreatedLists)
 firstList = []
 
 //CHECK IF THERE ARE LISTS IN LS, IF NOT, CREATE THE FIRST ONE.
-function checkCreatedLists(transcript){
-    const savedListsLS = JSON.parse(localStorage.getItem('Main Array Lists'))
+function checkCreatedLists(transcript) {
+    const savedListsLS = JSON.parse(localStorage.getItem('Main Array Lists')) || [];
 
-   if(savedListsLS === null || savedListsLS.length == 0){
-        console.log('No list found, creating the first one')
+    if (transcript === "new list") {
+        console.log("Voice command detected: Creating new list...");
 
-        const newList1 = {
-            listID: (Math.random()*1000*1000).toFixed(0),
+        // Create a new list object
+        const newList = {
+            listID: (Math.random() * 1000 * 1000).toFixed(0),
+            listTitle: 'New To-Do List',
+            tasks: []
+        };
+
+        savedListsLS.push(newList);
+
+        // Save to local storage
+        localStorage.setItem('Main Array Lists', JSON.stringify(savedListsLS));
+
+        // Render the updated lists
+        renderLists(savedListsLS);
+    } else if (savedListsLS.length === 0) {
+        // If no lists exist, create the first one
+        console.log("No lists found. Creating the first one...");
+        
+        const firstList = [{
+            listID: (Math.random() * 1000 * 1000).toFixed(0),
             listTitle: 'Todo List',
             tasks: []
-        }
+        }];
 
-        firstList.push(newList1)
-        
-        localStorage.setItem('Main Array Lists', JSON.stringify(firstList))
-        renderLists(firstList)
-        
-    }else if(transcript === 'new list'){
-            // const combinedLists = []
-            savedListsLS.push({
-                listID: (Math.random()*1000*1000).toFixed(0),
-                listTitle: 'Todo List',
-                tasks: []
-            })
-            console.log(savedListsLS)
- 
-            localStorage.setItem('Main Array Lists', JSON.stringify(savedListsLS))
-            renderLists(savedListsLS)
-        }else{
-            renderLists(savedListsLS)
-        }
+        localStorage.setItem('Main Array Lists', JSON.stringify(firstList));
+        renderLists(firstList);
+    } else {
+        // Render existing lists
+        renderLists(savedListsLS, transcript);
+    }
 }
 
 
+
 //RENDER LISTS IN THE DOM
-function renderLists(arrayOfLists){
+function renderLists(arrayOfLists, transcript){
+    console.log(transcript)
     mainListsContainer.innerHTML = ''
 
     arrayOfLists.forEach((list, index) => {
@@ -234,31 +241,3 @@ function renderLists(arrayOfLists){
                 formInputContainer.appendChild(inputContainer)
     })
 }
-
-
-const arrayExample = [
-    ['apple','orange','banana'],
-    ['juice','car','computer',[
-        'casa1','casa2','casa3'
-    ]]
-]
-
-console.log(arrayExample[1][3][1])
-
-
-const results = [
-    [ { 
-        transcript: "Hello world", 
-        confidence: 0.98 
-    },
-    { 
-        transcript2: "Hello House", 
-        confidence2: 100
-    } ],
-    [ { 
-        transcript: "Hi there", 
-        confidence: 0.85 
-    } ]
-  ];
-  
-  console.log(results[1][0].confidence)
