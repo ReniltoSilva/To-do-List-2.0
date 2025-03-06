@@ -2,43 +2,42 @@ const mainListsContainer = document.querySelector('#mainListsContainer')
 const newListBTN = document.querySelector('.addNewList')
 const startBtn = document.querySelector('#start-btn')
 
-//Speech recognition test
-if (!('webkitSpeechRecognition' in window)) {
-    console.log("Your browser does not support Speech Recognition.");
-} else {
-    console.log("Speech Recognition is supported.");
-    // Initialize Speech Recognition
-}
+//PSEECH RECOGNITION COMMAND
+// //Speech recognition test
+// if (!('webkitSpeechRecognition' in window)) {
+//     console.log("Your browser does not support Speech Recognition.");
+// } else {
+//     console.log("Speech Recognition is supported.");
+//     // Initialize Speech Recognition
+// }
 
-const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+// const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 
-// Optional settings
-recognition.continuous = false; // Stop after one sentence
-recognition.lang = "en-US"; // Language
-recognition.interimResults = false; // Only return final result
+// // Optional settings
+// recognition.continuous = false; // Stop after one sentence
+// recognition.lang = "en-US"; // Language
+// recognition.interimResults = false; // Only return final result
 
-// Start recognition when the button is clicked
-startBtn.addEventListener("click", () => {
-    recognition.start();
-    console.log("Listening...");
-});
+// // Start recognition when the button is clicked
+// startBtn.addEventListener("click", () => {
+//     recognition.start();
+//     console.log("Listening...");
+// });
 
-// Handle the result
-recognition.onresult = (event) => {
-    const transcript = event.results[0][0].transcript; // Get recognized text
+// // Handle the result
+// recognition.onresult = (event) => {
+//     const transcript = event.results[0][0].transcript; // Get recognized text
 
-        document.getElementById("output").textContent = transcript; // Display text
-        console.log("Recognized text:", transcript);
-        checkCreatedLists(transcript)
-};
+//         document.getElementById("output").textContent = transcript; // Display text
+//         console.log("Recognized text:", transcript);
+//         checkCreatedLists(transcript)
+// };
 
-// Handle errors
-recognition.onerror = (event) => {
-    console.log("Error:", event.error);
-};
+// // Handle errors
+// recognition.onerror = (event) => {
+//     console.log("Error:", event.error);
+// };
 
-
-//-----------------------------------------------------------------------------
 
 newListBTN.addEventListener('click', () => {
     
@@ -101,16 +100,43 @@ function renderLists(arrayOfLists){
 
         //CREATE LIST ELEMENTS
         const mainContainer = document.createElement('div')
-        const delBtnContainer = document.createElement('span')
-              delBtnContainer.addEventListener('click', () => {
-                
-                const newValue = arrayOfLists.filter((i) => {
-                   return i.listID !== list.listID
-                })
+        
+        //Icon Pop-up Container
+        const iconPopupContainer = document.createElement('span')
+            iconPopupContainer.addEventListener('click', () => {
+                        
+                listMenuContainer.style.display = listMenuContainer.style.display === 'block' ? 'none' : 'block'
 
-                localStorage.setItem('Main Array Lists', JSON.stringify(newValue))
-                renderLists(newValue)
+                // if(listMenuContainer.style.display === 'none'){
+                //     listMenuContainer.style.display = 'block'
+
+                // }else{
+                //     listMenuContainer.style.display = 'none'
+                // }
+
+                console.log('Menu Clicked')
             })
+
+            //Icon to toggle Menu Pop-up
+            const iconPopup = document.createElement('i')
+
+            //Menu pop-up Container
+            const listMenuContainer = document.createElement('div')
+
+                //Delete Btn for Lists(inside listMenuContainer)
+                const deleteBtnList = document.createElement('li')
+                deleteBtnList.addEventListener('click', () => {
+                    
+                    const newValue = arrayOfLists.filter((i) => {
+                    return i.listID !== list.listID
+                    })
+
+                    localStorage.setItem('Main Array Lists', JSON.stringify(newValue))
+                    renderLists(newValue)
+                })
+                deleteBtnList.classList.add('deleteBtnList')
+                deleteBtnList.textContent = 'Delete List'//Name of icon from Google Icons
+                
                 
         const titleListContainer = document.createElement('h1')
                 titleListContainer.addEventListener('input', (e) => {
@@ -126,12 +152,17 @@ function renderLists(arrayOfLists){
 
         //ADD CLASSES TO LIST ELEMENTS
         mainContainer.classList.add('mainContainer')
-            delBtnContainer.classList.add('containerDelete')
-            delBtnContainer.classList.add('material-symbols-outlined')
-            delBtnContainer.textContent = 'delete_forever'
+            iconPopupContainer.classList.add('iconPopupContainer')
+                iconPopup.classList.add('material-symbols-outlined')
+                iconPopup.textContent = 'more_vert'
+            listMenuContainer.classList.add('listMenuContainer')
+            listMenuContainer.style.display = 'none'
+
+
             titleListContainer.classList.add('titleListContainer')
                 titleListContainer.setAttribute('contenteditable', 'true')
                 titleListContainer.textContent = `${list.listTitle}`
+
             formGeneralContainer.classList.add('formGeneralContainer')
                 formInputContainer.classList.add('formContainer')
                 inputContainer.classList.add('inputContainer')
@@ -229,36 +260,43 @@ function renderLists(arrayOfLists){
 
         //APPEND LIST ELEMENTS TO THE DOM       
         mainListsContainer.appendChild(mainContainer)
-        mainContainer.append(delBtnContainer, titleListContainer, formGeneralContainer, ulContainer)
+        mainContainer.append(iconPopupContainer, listMenuContainer, titleListContainer, formGeneralContainer, ulContainer)
+            listMenuContainer.append(deleteBtnList)
+        iconPopupContainer.appendChild(iconPopup)
             formGeneralContainer.appendChild(formInputContainer)
                 formInputContainer.appendChild(inputContainer)
     })
 }
 
 
-const arrayExample = [
-    ['apple','orange','banana'],
-    ['juice','car','computer',[
-        'casa1','casa2','casa3'
-    ]]
-]
-
-console.log(arrayExample[1][3][1])
 
 
-const results = [
-    [ { 
-        transcript: "Hello world", 
-        confidence: 0.98 
-    },
-    { 
-        transcript2: "Hello House", 
-        confidence2: 100
-    } ],
-    [ { 
-        transcript: "Hi there", 
-        confidence: 0.85 
-    } ]
-  ];
+
+
+// //TESTING SELECTING VALUES IN NESTED ARRAYS WITH MULTIPLE INDEXES
+// const arrayExample = [
+//     ['apple','orange','banana'],
+//     ['juice','car','computer',[
+//         'casa1','casa2','casa3'
+//     ]]
+// ]
+
+// console.log(arrayExample[1][3][1])
+
+
+// const results = [
+//     [ { 
+//         transcript: "Hello world", 
+//         confidence: 0.98 
+//     },
+//     { 
+//         transcript2: "Hello House", 
+//         confidence2: 100
+//     } ],
+//     [ { 
+//         transcript: "Hi there", 
+//         confidence: 0.85 
+//     } ]
+//   ];
   
-  console.log(results[1][0].confidence)
+//   console.log(results[1][0].confidence)
