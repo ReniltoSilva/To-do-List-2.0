@@ -103,6 +103,7 @@ function renderLists(arrayOfLists){
         
         //Icon Pop-up Container
         const iconPopupContainer = document.createElement('span')
+        
             iconPopupContainer.addEventListener('click', () => {
                         
                 listMenuContainer.style.display = listMenuContainer.style.display === 'block' ? 'none' : 'block'
@@ -114,8 +115,19 @@ function renderLists(arrayOfLists){
                 //     listMenuContainer.style.display = 'none'
                 // }
 
-                console.log('Menu Clicked')
             })
+
+            // Close all other menus before opening a new one
+            iconPopupContainer.addEventListener("click", () => {
+                document.querySelectorAll(".listMenuContainer").forEach((menu) => {
+                    // console.log(listMenuContainer)
+
+                    if (menu !== listMenuContainer) {
+                        menu.style.display = "none";
+                    }
+                });
+                console.log(document.querySelectorAll(".listMenuContainer"))
+            });
 
             //Icon to toggle Menu Pop-up
             const iconPopup = document.createElement('i')
