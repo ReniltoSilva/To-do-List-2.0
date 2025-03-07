@@ -46,7 +46,7 @@ body{
     max-height: 100vh;
     flex-wrap: nowrap;
     max-width:fit-content;
-    /* background-color: lightpink; */
+    overflow: visible;
 }
 
 .mainContainer{
@@ -61,6 +61,8 @@ body{
     margin: 10px;
     transform: scale(1);
     box-shadow: #1d1d1d 1px 2px 5px;
+    overflow: visible;
+    z-index: 1;
 }
 
 .titleListContainer{
@@ -103,21 +105,23 @@ body{
     'opsz' 24
 }
 
-.listMenuContainer{
-    position: absolute;
-    right: -155px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.listMenuContainer {
+    position: absolute; /* Positions it relative to its parent */
+    top: 0px; /* Adjust this to move the menu down */
+    left: 100%;
+    right: 0;
     width: 150px;
-    height: 200px;
+    height: auto;
     background-color: rgb(207, 207, 207);
     border-radius: 5px;
     box-shadow: #1d1d1d 1px 2px 5px;
-    z-index: 1000;
+    z-index: 9999000000; /* Ensures it stays on top */
+    display: none; /* Initially hidden */
+    border: #1d1d1d 2px solid;
 }
 
-.deleteBtnList{
+
+.buttonsInsideMenuPopup{
     display: flex;
     justify-content: center;
     align-items: center;

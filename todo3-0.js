@@ -2,7 +2,7 @@ const mainListsContainer = document.querySelector('#mainListsContainer')
 const newListBTN = document.querySelector('.addNewList')
 const startBtn = document.querySelector('#start-btn')
 
-//PSEECH RECOGNITION COMMAND
+//SPEECH RECOGNITION COMMAND
 // //Speech recognition test
 // if (!('webkitSpeechRecognition' in window)) {
 //     console.log("Your browser does not support Speech Recognition.");
@@ -100,44 +100,42 @@ function renderLists(arrayOfLists){
 
         //CREATE LIST ELEMENTS
         const mainContainer = document.createElement('div')
-        
+        //Icon to toggle Menu Pop-up
+        const iconPopup = document.createElement('i')
+        //Menu pop-up Container
+        const listMenuContainer = document.createElement('div')
         //Icon Pop-up Container
         const iconPopupContainer = document.createElement('span')
-        
-            iconPopupContainer.addEventListener('click', () => {
-                        
-                listMenuContainer.style.display = listMenuContainer.style.display === 'block' ? 'none' : 'block'
 
-                // if(listMenuContainer.style.display === 'none'){
-                //     listMenuContainer.style.display = 'block'
-
-                // }else{
-                //     listMenuContainer.style.display = 'none'
-                // }
-
-            })
-
-            // Close all other menus before opening a new one
-            iconPopupContainer.addEventListener("click", () => {
-                document.querySelectorAll(".listMenuContainer").forEach((menu) => {
-                    // console.log(listMenuContainer)
-
-                    if (menu !== listMenuContainer) {
-                        menu.style.display = "none";
-                    }
-                });
-                console.log(document.querySelectorAll(".listMenuContainer"))
+        document.addEventListener("click", (e) => {
+            document.querySelectorAll(".listMenuContainer").forEach((menu) => {
+                if (!menu.contains(e.target) && !e.target.closest(".iconPopupContainer")) {
+                    menu.style.display = "none";
+                }
             });
+        });
 
-            //Icon to toggle Menu Pop-up
-            const iconPopup = document.createElement('i')
-
-            //Menu pop-up Container
-            const listMenuContainer = document.createElement('div')
+        iconPopupContainer.addEventListener("click", (event) => {
+            event.stopPropagation(); // Prevents immediate closing
+        
+            // Close all other menus before opening a new one
+            document.querySelectorAll(".listMenuContainer").forEach((menu) => {
+                if (menu !== listMenuContainer) {
+                    menu.style.display = "none";
+                }
+            });
+        
+            // Toggle the menu
+            listMenuContainer.style.display =
+                listMenuContainer.style.display === "block" ? "none" : "block";
+        });
+        
 
                 //Delete Btn for Lists(inside listMenuContainer)
-                const deleteBtnList = document.createElement('li')
-                deleteBtnList.addEventListener('click', () => {
+                const deleteListBtn = document.createElement('li')
+                deleteListBtn.classList.add('buttonsInsideMenuPopup')
+                deleteListBtn.textContent = 'Delete List';//Name of icon from Google Icons
+                deleteListBtn.addEventListener('click', () => {
                     
                     const newValue = arrayOfLists.filter((i) => {
                     return i.listID !== list.listID
@@ -146,9 +144,33 @@ function renderLists(arrayOfLists){
                     localStorage.setItem('Main Array Lists', JSON.stringify(newValue))
                     renderLists(newValue)
                 })
-                deleteBtnList.classList.add('deleteBtnList')
-                deleteBtnList.textContent = 'Delete List'//Name of icon from Google Icons
-                
+
+                //Duplicate list btn for lists(inside listMenuContainer)
+                const duplicateListBtn = document.createElement('li')
+                    duplicateListBtn.classList.add('buttonsInsideMenuPopup')
+                    duplicateListBtn.textContent = 'Duplicate List';
+                    duplicateListBtn.addEventListener('click', () => {
+
+                      firstList.push({
+                        listID: list.listID,
+                        listTitle: `${list.listTitle} Copy`,
+                        tasks: list.tasks
+                      })
+
+                      arrayOfLists.push(...firstList)
+
+                        renderLists(arrayOfLists)
+                    })
+
+                //Share list btn for lists(inside listMenuContainer)
+                const shareListBtn = document.createElement('li')
+                shareListBtn.classList.add('buttonsInsideMenuPopup')
+                shareListBtn.textContent = 'Share List';
+                shareListBtn.addEventListener('click', () => {
+                        console.log('List Shared')
+                    })     
+
+
                 
         const titleListContainer = document.createElement('h1')
                 titleListContainer.addEventListener('input', (e) => {
@@ -273,7 +295,7 @@ function renderLists(arrayOfLists){
         //APPEND LIST ELEMENTS TO THE DOM       
         mainListsContainer.appendChild(mainContainer)
         mainContainer.append(iconPopupContainer, listMenuContainer, titleListContainer, formGeneralContainer, ulContainer)
-            listMenuContainer.append(deleteBtnList)
+            listMenuContainer.append(deleteListBtn, duplicateListBtn, shareListBtn)
         iconPopupContainer.appendChild(iconPopup)
             formGeneralContainer.appendChild(formInputContainer)
                 formInputContainer.appendChild(inputContainer)
