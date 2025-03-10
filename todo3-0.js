@@ -163,18 +163,34 @@ function renderLists(arrayOfLists){
 
                         localStorage.setItem('Main Array Lists', JSON.stringify(emptyArray))
 
-                        console.log(emptyArray)
                         renderLists(emptyArray)
-                    })
+                })
 
                 //Share list btn for lists(inside listMenuContainer)
-                const shareListBtn = document.createElement('li')
-                shareListBtn.classList.add('buttonsInsideMenuPopup')
-                shareListBtn.textContent = 'Share List';
-                shareListBtn.addEventListener('click', () => {
-                        console.log('List Shared')
-                    })     
+                const setListColor = document.createElement('li')
+                setListColor.classList.add('buttonsInsideMenuPopup')
+                setListColor.textContent = 'Change color';
+                setListColor.addEventListener('click', () => {
 
+
+                        console.log('List color changed')
+                })     
+
+                //Delete all completed tasks from list
+                const deleteAllCompletedTasks = document.createElement('li')
+                deleteAllCompletedTasks.classList.add('buttonsInsideMenuPopup')
+                deleteAllCompletedTasks.textContent = 'Delete all completed tasks';
+                deleteAllCompletedTasks.addEventListener('click', () => {
+
+                    const tasksDeleted = arrayOfLists[index].tasks.filter((task) => {
+                        return task.taskDone !== true
+                    })
+                    arrayOfLists[index].tasks = tasksDeleted
+                    localStorage.setItem('Main Array Lists', JSON.stringify(arrayOfLists))
+                    renderLists(arrayOfLists)
+                    
+                    console.log('All completed tasks deleted')
+                })
 
                 
         const titleListContainer = document.createElement('h1')
@@ -300,7 +316,7 @@ function renderLists(arrayOfLists){
         //APPEND LIST ELEMENTS TO THE DOM       
         mainListsContainer.appendChild(mainContainer)
         mainContainer.append(iconPopupContainer, listMenuContainer, titleListContainer, formGeneralContainer, ulContainer)
-            listMenuContainer.append(deleteListBtn, duplicateListBtn, shareListBtn)
+            listMenuContainer.append(deleteListBtn, duplicateListBtn, setListColor, deleteAllCompletedTasks)
         iconPopupContainer.appendChild(iconPopup)
             formGeneralContainer.appendChild(formInputContainer)
                 formInputContainer.appendChild(inputContainer)
