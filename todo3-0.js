@@ -150,16 +150,21 @@ function renderLists(arrayOfLists){
                     duplicateListBtn.classList.add('buttonsInsideMenuPopup')
                     duplicateListBtn.textContent = 'Duplicate List';
                     duplicateListBtn.addEventListener('click', () => {
+                        const emptyArray = []
+                        const savedLists = JSON.parse(localStorage.getItem('Main Array Lists'))
 
-                      firstList.push({
-                        listID: list.listID,
-                        listTitle: `${list.listTitle} Copy`,
-                        tasks: list.tasks
-                      })
+                        const firstList = {
+                            listID: (Math.random()*1000*1000).toFixed(0),
+                            listTitle: `${list.listTitle} Copy`,
+                            tasks: list.tasks
+                        }
 
-                      arrayOfLists.push(...firstList)
+                        emptyArray.push(firstList, ...savedLists)
 
-                        renderLists(arrayOfLists)
+                        localStorage.setItem('Main Array Lists', JSON.stringify(emptyArray))
+
+                        console.log(emptyArray)
+                        renderLists(emptyArray)
                     })
 
                 //Share list btn for lists(inside listMenuContainer)
