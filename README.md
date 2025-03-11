@@ -7,9 +7,10 @@ This is a to-do list with basic functionalities I've been working on.
 FUNCTIONALITIES:
 
 - Add tasks
-- Delete tasks
-- Mark task as done
 - Rename tasks
+- Delete tasks
+- Delete all tasks
+- Mark task as done
 - Rename lists
 - Add new lists
 - Delete lists
@@ -18,8 +19,7 @@ FUNCTIONALITIES:
 
 FUTURE FUNCTIONALITIES AND THINGS TO FIX
 
-- Save all information in local Storage
 - Fix some CSS issues
-- Fix night mode button when it's on night mode
+- Add night mode button when it's on night mode
 - User to be able to change background
   etc
