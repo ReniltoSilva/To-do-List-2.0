@@ -479,8 +479,7 @@ function renderLists(arrayOfLists) {
         });
 
         // ✅ Append everything to the DOM
-        mainContainer.appendChild(titleListContainer);
-        mainContainer.appendChild(deleteListBtn);
+        mainContainer.append(titleListContainer, deleteListBtn);
         mainListsContainer.appendChild(mainContainer);
     });
 }
