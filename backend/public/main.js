@@ -344,37 +344,6 @@
 
 
 
-
-
-// // //TESTING SELECTING VALUES IN NESTED ARRAYS WITH MULTIPLE INDEXES
-// // const arrayExample = [
-// //     ['apple','orange','banana'],
-// //     ['juice','car','computer',[
-// //         'casa1','casa2','casa3'
-// //     ]]
-// // ]
-
-// // console.log(arrayExample[1][3][1])
-
-
-// // const results = [
-// //     [ { 
-// //         transcript: "Hello world", 
-// //         confidence: 0.98 
-// //     },
-// //     { 
-// //         transcript2: "Hello House", 
-// //         confidence2: 100
-// //     } ],
-// //     [ { 
-// //         transcript: "Hi there", 
-// //         confidence: 0.85 
-// //     } ]
-// //   ];
-  
-// //   console.log(results[1][0].confidence)
-
-
 const mainListsContainer = document.querySelector("#mainListsContainer");
 const newListBTN = document.querySelector(".addNewList");
 
@@ -397,9 +366,10 @@ async function checkCreatedLists() {
 
 // ✅ Create a first list if no lists exist in MongoDB
 async function createFirstList() {
+
     const newList = {
-        title: "Todo List",
-        completed: false
+        listTitle: "Todo List",
+        tasks: [],
     };
 
     try {
@@ -418,8 +388,8 @@ async function createFirstList() {
 // ✅ Add a new list to MongoDB when clicking the button
 newListBTN.addEventListener("click", async () => {
     const newList = {
-        title: "New Todo List",
-        completed: false
+        listTitle: "Todo List",
+        tasks: [],
     };
 
     try {
@@ -444,7 +414,7 @@ function renderLists(arrayOfLists) {
         mainContainer.classList.add("mainContainer");
 
         const titleListContainer = document.createElement("h1");
-        titleListContainer.textContent = list.title;
+        titleListContainer.textContent = list.listTitle;
         titleListContainer.classList.add("titleListContainer");
         titleListContainer.setAttribute("contenteditable", "true");
 
@@ -455,7 +425,7 @@ function renderLists(arrayOfLists) {
                 await fetch(`https://to-do-list-2-4u56.onrender.com/todos/${list._id}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ title: titleListContainer.textContent })
+                    body: JSON.stringify({ listTitle: titleListContainer.textContent })
                 });
             } catch (error) {
                 console.error("Error updating list title:", error);
