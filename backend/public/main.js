@@ -425,7 +425,7 @@ function renderLists(arrayOfLists) {
                 await fetch(`https://to-do-list-2-4u56.onrender.com/todos/${list._id}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ listTitle: titleListContainer.textContent })
+                    body: JSON.stringify({ list: titleListContainer.textContent })
                 });
             } catch (error) {
                 console.error("Error updating list title:", error);
