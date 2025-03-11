@@ -3,6 +3,11 @@ const newListBTN = document.querySelector('.addNewList')
 const startBtn = document.querySelector('#start-btn')
 
 
+fetch("https://to-do-list-2-4u56.onrender.com/todos")
+  .then(response => response.json())
+  .then(data => console.log(data)); // Expected: list of todos
+
+
 newListBTN.addEventListener('click', () => {
     
     const listsFromLS = JSON.parse(localStorage.getItem('Main Array Lists'))

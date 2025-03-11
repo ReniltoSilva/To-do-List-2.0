@@ -22,9 +22,11 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("✅ Connected to MongoDB"))
     .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
-app.get("/", (req, res) => {
-    res.send("Server is running!");
-});
+    app.use(express.static(path.join(__dirname, "public")));
+
+    app.get("/", (req, res) => {
+        res.sendFile(path.join(__dirname, "public", "main.html"));
+    });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
