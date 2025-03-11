@@ -2,42 +2,6 @@ const mainListsContainer = document.querySelector('#mainListsContainer')
 const newListBTN = document.querySelector('.addNewList')
 const startBtn = document.querySelector('#start-btn')
 
-//SPEECH RECOGNITION COMMAND
-// //Speech recognition test
-// if (!('webkitSpeechRecognition' in window)) {
-//     console.log("Your browser does not support Speech Recognition.");
-// } else {
-//     console.log("Speech Recognition is supported.");
-//     // Initialize Speech Recognition
-// }
-
-// const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-
-// // Optional settings
-// recognition.continuous = false; // Stop after one sentence
-// recognition.lang = "en-US"; // Language
-// recognition.interimResults = false; // Only return final result
-
-// // Start recognition when the button is clicked
-// startBtn.addEventListener("click", () => {
-//     recognition.start();
-//     console.log("Listening...");
-// });
-
-// // Handle the result
-// recognition.onresult = (event) => {
-//     const transcript = event.results[0][0].transcript; // Get recognized text
-
-//         document.getElementById("output").textContent = transcript; // Display text
-//         console.log("Recognized text:", transcript);
-//         checkCreatedLists(transcript)
-// };
-
-// // Handle errors
-// recognition.onerror = (event) => {
-//     console.log("Error:", event.error);
-// };
-
 
 newListBTN.addEventListener('click', () => {
     

@@ -52,7 +52,7 @@ body{
 .mainContainer{
     position: relative;
     border-radius: 10px;
-    border: 1px solid rgba(255, 0, 0, 0.668);
+    /* border: 1px solid rgba(255, 0, 0, 0.668); */
     display: flex;
     justify-content:flex-start;
     align-items: center;
@@ -170,11 +170,10 @@ width: 10px;
     height: 100%;
     border: none;
     background: transparent;
-    border: 1px solid rgba(255, 0, 0, 0.668);
+    border: 1px solid rgba(85, 83, 83, 0.668);
     color: #1d1d1d;
     font-size: 15px;
     transition: ease-out 0.2s;
-    
 }
 
 
