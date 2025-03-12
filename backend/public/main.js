@@ -372,12 +372,8 @@ async function createFirstList() {
     // };
 
     const newList = {
-        listTitle: { type: String, required: true },
-        tasks: [{
-            taskID: {type: Number, required: true},
-            taskTitle: {type: String, required: true},
-            taskDone: {type: Boolean, default: false}
-        }]
+        listTitle: "Todo List",
+        tasks: []
     }
 
     try {
@@ -401,12 +397,8 @@ newListBTN.addEventListener("click", async () => {
     // };
 
     const newList = {
-        listTitle: { type: String, required: true },
-        tasks: [{
-            taskID: {type: Number, required: true},
-            taskTitle: {type: String, required: true},
-            taskDone: {type: Boolean, default: false}
-        }]
+        listTitle: 'Todo List',
+        tasks: []
     };
 
     try {
