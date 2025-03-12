@@ -366,10 +366,19 @@ async function checkCreatedLists() {
 
 // ✅ Create a first list if no lists exist in MongoDB
 async function createFirstList() {
+    // const newList = {
+    //     title: "Todo List",
+    //     completed: false
+    // };
+
     const newList = {
-        title: "Todo List",
-        completed: false
-    };
+        listTitle: { type: String, required: true },
+        tasks: [{
+            taskID: {type: Number, required: true},
+            taskTitle: {type: String, required: true},
+            taskDone: {type: Boolean, default: false}
+        }]
+    }
 
     try {
         await fetch("https://to-do-list-2-4u56.onrender.com/todos", {
@@ -386,9 +395,18 @@ async function createFirstList() {
 
 // ✅ Add a new list to MongoDB when clicking the button
 newListBTN.addEventListener("click", async () => {
+    // const newList = {
+    //     title: "New Todo List",
+    //     completed: false
+    // };
+
     const newList = {
-        title: "New Todo List",
-        completed: false
+        listTitle: { type: String, required: true },
+        tasks: [{
+            taskID: {type: Number, required: true},
+            taskTitle: {type: String, required: true},
+            taskDone: {type: Boolean, default: false}
+        }]
     };
 
     try {
@@ -413,7 +431,7 @@ function renderLists(arrayOfLists) {
         mainContainer.classList.add("mainContainer");
 
         const titleListContainer = document.createElement("h1");
-        titleListContainer.textContent = list.title;
+        titleListContainer.textContent = list.listTitle;
         titleListContainer.classList.add("titleListContainer");
         titleListContainer.setAttribute("contenteditable", "true");
 
@@ -424,7 +442,7 @@ function renderLists(arrayOfLists) {
                 await fetch(`https://to-do-list-2-4u56.onrender.com/todos/${list._id}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ title: titleListContainer.textContent })
+                    body: JSON.stringify({ listTitle: titleListContainer.textContent })
                 });
             } catch (error) {
                 console.error("Error updating list title:", error);
