@@ -12,7 +12,7 @@ const TaskSchema = new mongoose.Schema({
 });
 
 const TodoSchema = new mongoose.Schema({
-    titleList: { type: String, required: true },
+    listTitle: { type: String, required: true },
     tasks: { type: [TaskSchema], default: [] } // ✅ Allows an empty array or an array of tasks
 });
 
