@@ -21,5 +21,6 @@ FUTURE FUNCTIONALITIES AND THINGS TO FIX
 
 - Fix some CSS issues
 - Add night mode button when it's on night mode
-- User to be able to change background
-  etc
+- User will be able to change background
+- User will be able to change list color
+- etc
